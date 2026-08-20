@@ -330,7 +330,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>
               <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
               <a href={`tel:+${content.contactPhone.replace(/[^\d]/g, '')}`}>{content.contactPhone}</a>
-              <a href="#" style={{ fontWeight: 700, borderBottom: '1px solid rgb(20,21,22)', paddingBottom: 6, alignSelf: 'flex-start', marginTop: 6 }}>CONTACT US</a>
             </div>
           </div>
           <div>
