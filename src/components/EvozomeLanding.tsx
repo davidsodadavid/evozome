@@ -430,37 +430,70 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </p>
         </div>
 
-        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
-          {content.gallery.map((g, i) => (
-            <div key={g.img + i} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
-              <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
-                {String(i + 1).padStart(2, '0')}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ maxWidth: 1600, margin: '50px auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
-          {HEAL_CARDS.map((c, i) => (
-            <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
-              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line1}</div>
-              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line2}</div>
-              <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
-                <div>
-                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{c.more}</div>
+        {isMobile ? (
+          <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: '1fr', gap: 'clamp(28px,3.4vw,52px)' }}>
+            {content.gallery.map((g, i) => (
+              <div key={g.img + i} style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+                <div data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
+                  <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <div data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
+                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{g.line1}</div>
+                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{g.line2}</div>
+                  <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
+                    <div>
+                      <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{HEAL_CARDS[i]?.more}</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setOpenCards((prev) => ({ ...prev, [i]: !prev[i] }))}
+                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, fontSize: 18, lineHeight: 1.17, color: '#fff', borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}
+                  >
+                    {openCards[i] ? 'READ LESS' : 'READ MORE'}
+                  </button>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => setOpenCards((prev) => ({ ...prev, [i]: !prev[i] }))}
-                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, fontSize: 18, lineHeight: 1.17, color: '#fff', borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}
-              >
-                {openCards[i] ? 'READ LESS' : 'READ MORE'}
-              </button>
+            ))}
+          </div>
+        ) : (
+          <>
+            <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
+              {content.gallery.map((g, i) => (
+                <div key={g.img + i} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
+                  <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+
+            <div style={{ maxWidth: 1600, margin: '50px auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
+              {HEAL_CARDS.map((c, i) => (
+                <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
+                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line1}</div>
+                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line2}</div>
+                  <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
+                    <div>
+                      <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{c.more}</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setOpenCards((prev) => ({ ...prev, [i]: !prev[i] }))}
+                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, fontSize: 18, lineHeight: 1.17, color: '#fff', borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}
+                  >
+                    {openCards[i] ? 'READ LESS' : 'READ MORE'}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       {lightbox >= 0 && (
