@@ -40,6 +40,8 @@ export async function updateContent(
 
     aboutText: str(formData, "aboutText"),
 
+    windowImage: str(formData, "windowImage"),
+
     armadilloImage: str(formData, "armadilloImage"),
 
     gallery: [0, 1, 2, 3].map((i) => str(formData, `gallery-${i}`)),

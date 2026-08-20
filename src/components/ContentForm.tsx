@@ -99,6 +99,11 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
+        <h2 className={sectionTitleClass}>Resonance Chamber window (photo | logo)</h2>
+        <ImagePicker name="windowImage" label="Photo (left half)" initialUrl={content.windowImage} mediaLibrary={mediaLibrary} />
+      </div>
+
+      <div className={sectionClass}>
         <h2 className={sectionTitleClass}>Outside gallery — 4 photos</h2>
         <div className="flex flex-wrap gap-6">
           {[0, 1, 2, 3].map((i) => (

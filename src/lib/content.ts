@@ -23,6 +23,9 @@ export type LandingContent = {
 
   aboutText: string;
 
+  // "Window" split panel (photo | logo) below the Armadillo feature photo.
+  windowImage: string;
+
   armadilloImage: string;
 
   gallery: string[];
@@ -51,6 +54,8 @@ export const DEFAULT_CONTENT: LandingContent = {
 
   aboutText:
     "A PRIVATE ARCHITECTURAL SANCTUARY FOR SOUND & TRANSFORMATION\nINSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION, THE RESONANCE CHAMBER IS A PRIVATE SANCTUARY WHERE ARCHITECTURE BECOMES AN INSTRUMENT.",
+
+  windowImage: "/evozome/img-06.png",
 
   armadilloImage: "/evozome/img-06.png",
 
