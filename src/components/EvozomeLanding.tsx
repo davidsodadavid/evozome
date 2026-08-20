@@ -318,16 +318,14 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       {/* RESONANCE CHAMBER WINDOW */}
       <section style={{ background: '#E2E0D5', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
-          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 100, lineHeight: 1.03 }}>
-            RESONANCE<br />CHAMBER
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 100, lineHeight: 1.03 }} />
+          <div data-reveal="unveil" data-zoom style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', animationDelay: '.1s' }}>
             <div style={{ overflow: 'hidden' }}>
               <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ background: 'rgb(20,21,22)', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 'clamp(32px,4vw,48px)', padding: 'clamp(32px,4vw,56px)' }}>
               <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
-              <div>
+              <div data-reveal style={{ animationDelay: '.25s' }}>
                 <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 36, lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
                   {content.windowHeading}
                 </h2>
