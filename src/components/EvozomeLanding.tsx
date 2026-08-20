@@ -216,7 +216,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           data-reveal
           style={{ position: 'absolute', right: 'clamp(16px,6vw,90px)', bottom: 'clamp(28px,7vh,80px)', width: 'clamp(90px,9vw,140px)', height: 'clamp(90px,9vw,140px)', objectFit: 'cover', animationDelay: '.12s' }}
         />
-        <div style={{ position: 'relative', maxWidth: 860, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
+        <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
           <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
             {content.introLabel.split('\n').map((line, i) => (
               <span key={i}>
