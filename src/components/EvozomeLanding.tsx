@@ -1,8 +1,12 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useActionState } from 'react';
 import { DEFAULT_CONTENT, type LandingContent } from '@/lib/content';
 import { isVideoUrl } from '@/lib/uploads';
+import { subscribe, type SubscribeState } from '@/app/actions/subscribe';
+import TurnstileWidget from '@/components/TurnstileWidget';
+
+const subscribeInitialState: SubscribeState = {};
 
 /**
  * Evozome full landing page. Section order: nav, hero, resonance chamber,
@@ -73,6 +77,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const [w, setW] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
   const [lightbox, setLightbox] = useState(-1);
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
+  const [subscribeState, subscribeAction, subscribePending] = useActionState(subscribe, subscribeInitialState);
 
   useEffect(() => {
     const onResize = () => setW(window.innerWidth);
@@ -181,8 +186,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', padding: '34px clamp(24px,4vw,64px)', background: 'transparent' }}>
         <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-start', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
           <a href="#about">ABOUT</a>
-          <a href="#">HOME</a>
-          <a href="#locations">LOCATIONS</a>
         </nav>
         <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, padding: '0 clamp(18px,3vw,44px)' }}>
           <img src="/evozome/logo-light.png" alt="" width={30} height={30} style={{ width: 30, height: 30, display: 'block' }} />
@@ -190,7 +193,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         </a>
         <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
           <a href="#contact">CONTACT</a>
-          <a href="#products">VISIT</a>
         </nav>
       </header>
 
@@ -416,10 +418,37 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </div>
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>NEWSLETTER</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid rgb(20,21,22)', paddingBottom: 12, maxWidth: 420 }}>
-              <input type="email" placeholder="YOUR EMAIL" style={{ flex: 1, background: 'none', border: 'none', outline: 'none', fontWeight: 400, fontSize: 18, color: 'rgb(20,21,22)' }} />
-              <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 18, color: 'rgb(20,21,22)' }}>→</button>
-            </div>
+            {subscribeState.success ? (
+              <div style={{ fontWeight: 400, fontSize: 16, lineHeight: 1.3, maxWidth: 420 }}>
+                YOU&apos;RE SUBSCRIBED — THANK YOU.
+              </div>
+            ) : (
+              <form action={subscribeAction} style={{ maxWidth: 420 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid rgb(20,21,22)', paddingBottom: 12 }}>
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    placeholder="YOUR EMAIL"
+                    style={{ flex: 1, background: 'none', border: 'none', outline: 'none', fontWeight: 400, fontSize: 18, color: 'rgb(20,21,22)' }}
+                  />
+                  <button
+                    type="submit"
+                    disabled={subscribePending}
+                    aria-label="Subscribe"
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 18, color: 'rgb(20,21,22)', opacity: subscribePending ? 0.5 : 1 }}
+                  >
+                    →
+                  </button>
+                </div>
+                <div style={{ marginTop: 10 }}>
+                  <TurnstileWidget resetKey={subscribeState} />
+                </div>
+                {subscribeState.error && (
+                  <p style={{ marginTop: 8, fontSize: 13, color: '#b4643e' }}>{subscribeState.error}</p>
+                )}
+              </form>
+            )}
           </div>
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>FOLLOW</div>
