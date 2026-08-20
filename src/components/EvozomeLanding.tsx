@@ -225,7 +225,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               </span>
             ))}
           </div>
-          <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(28px,4.2vw,54px)', lineHeight: 1.15, animationDelay: '.1s' }}>
+          <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontSize: 100, lineHeight: 1.15, animationDelay: '.1s' }}>
             {content.introStatement}
           </div>
           <a
