@@ -287,12 +287,14 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* INTRO STATEMENT */}
       <section style={{ position: 'relative', background: 'rgb(20,21,22)', padding: 'clamp(90px,13vw,180px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
-        <div data-reveal="unveil" style={{ position: 'absolute', left: 100, top: 600, width: 385 }}>
+        <div data-reveal="unveil" style={{ position: 'absolute', left: isMobile ? 20 : 100, top: isMobile ? 300 : 600, width: isMobile ? 192 : 385 }}>
           <img src={content.introImageLeft} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div data-reveal="unveil" style={{ position: 'absolute', right: 60, top: 100, width: 385, animationDelay: '.12s' }}>
-          <img src={content.introImageRight} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
-        </div>
+        {!isMobile && (
+          <div data-reveal="unveil" style={{ position: 'absolute', right: 60, top: 100, width: 385, animationDelay: '.12s' }}>
+            <img src={content.introImageRight} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
+        )}
         <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
           <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
             {content.introLabel.split('\n').map((line, i) => (
@@ -302,7 +304,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               </span>
             ))}
           </div>
-          <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontSize: 100, lineHeight: 1.15, animationDelay: '.1s' }}>
+          <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontSize: 'clamp(34px,9vw,100px)', lineHeight: 1.15, animationDelay: '.1s' }}>
             {content.introStatement}
           </div>
           <a
@@ -340,12 +342,30 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* BUILD TO HEAL (oversized italic) */}
-      <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgb(20,21,22)', paddingBottom: 'clamp(90px,12vh,160px)' }}>
+      <section
+        style={{
+          position: 'relative',
+          minHeight: isMobile ? undefined : 'clamp(440px,76vh,900px)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgb(20,21,22)',
+          padding: isMobile ? 'clamp(40px,6vh,64px) 0 clamp(48px,7vh,72px)' : '0 0 clamp(90px,12vh,160px)',
+        }}
+      >
         <div style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
           <div style={{ textAlign: 'left' }}>BUILD TO</div>
           <div style={{ marginLeft: 'clamp(160px,22vw,440px)' }}>HEAL</div>
         </div>
-        <p data-reveal style={{ position: 'absolute', left: 'clamp(24px,4vw,64px)', bottom: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651 }}>
+        <p
+          data-reveal
+          style={
+            isMobile
+              ? { position: 'relative', marginTop: 32, padding: '0 clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, maxWidth: 651 }
+              : { position: 'absolute', left: 'clamp(24px,4vw,64px)', bottom: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651 }
+          }
+        >
           {content.resonanceText}
         </p>
       </section>
@@ -376,9 +396,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       {/* RESONANCE CHAMBER WINDOW */}
       <section style={{ background: '#E2E0D5', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
-          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 100, lineHeight: 1.03 }} />
-          <div data-reveal="unveil" data-zoom style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', animationDelay: '.1s' }}>
-            <div style={{ overflow: 'hidden' }}>
+          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(40px,9vw,100px)', lineHeight: 1.03 }} />
+          <div data-reveal="unveil" data-zoom style={{ display: 'grid', gridTemplateColumns: twoCol, animationDelay: '.1s' }}>
+            <div style={{ overflow: 'hidden', aspectRatio: isMobile ? '4 / 3' : undefined }}>
               <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ background: 'rgb(20,21,22)', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 'clamp(32px,4vw,48px)', padding: 'clamp(32px,4vw,56px)' }}>
