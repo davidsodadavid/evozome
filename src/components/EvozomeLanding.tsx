@@ -356,7 +356,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <div>{new Date().getFullYear()} — EVOZOME</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span>ALL RIGHTS RESERVED</span>
-            <a href="#" aria-label="Back to top" style={{ display: 'block' }}>
+            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 120 }}>
               <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
             </a>
           </div>
