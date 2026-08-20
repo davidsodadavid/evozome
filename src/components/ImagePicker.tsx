@@ -126,33 +126,59 @@ export default function ImagePicker({
         <div className="rounded-md border border-white/10 bg-white/5 p-3">
           {libraryItems.length === 0 ? (
             <p className="text-xs text-white/50">Nothing uploaded yet — use the upload button above.</p>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              {libraryItems.map((m) => (
-                <button
-                  key={m.key}
-                  type="button"
-                  onClick={() => {
-                    setUrl(m.url);
-                    setLibraryOpen(false);
-                  }}
-                  title={m.filename}
-                  className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-md border-2 ${
-                    url === m.url ? "border-[rgb(226,224,213)]" : "border-transparent hover:border-white/30"
-                  }`}
-                >
-                  {m.kind === "video" ? (
-                    <video src={m.url} className="h-full w-full object-cover" muted />
-                  ) : (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={m.url} alt="" className="h-full w-full object-cover" />
-                  )}
-                </button>
-              ))}
+          ) : kinds.length > 1 ? (
+            <div className="flex flex-col gap-3">
+              {kinds.map((kind) => {
+                const items = libraryItems.filter((m) => m.kind === kind);
+                if (items.length === 0) return null;
+                return (
+                  <div key={kind} className="flex flex-col gap-2">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-white/40">
+                      {kind === "photo" ? "Photos" : "Videos"}
+                    </span>
+                    <MediaGrid items={items} selectedUrl={url} onSelect={(u) => { setUrl(u); setLibraryOpen(false); }} />
+                  </div>
+                );
+              })}
             </div>
+          ) : (
+            <MediaGrid items={libraryItems} selectedUrl={url} onSelect={(u) => { setUrl(u); setLibraryOpen(false); }} />
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+function MediaGrid({
+  items,
+  selectedUrl,
+  onSelect,
+}: {
+  items: MediaItem[];
+  selectedUrl: string;
+  onSelect: (url: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {items.map((m) => (
+        <button
+          key={m.key}
+          type="button"
+          onClick={() => onSelect(m.url)}
+          title={m.filename}
+          className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-md border-2 ${
+            selectedUrl === m.url ? "border-[rgb(226,224,213)]" : "border-transparent hover:border-white/30"
+          }`}
+        >
+          {m.kind === "video" ? (
+            <video src={m.url} className="h-full w-full object-cover" muted />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={m.url} alt="" className="h-full w-full object-cover" />
+          )}
+        </button>
+      ))}
     </div>
   );
 }
