@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
-import { saveContent, type LandingContent } from "@/lib/content";
+import { getContent, saveContent, type LandingContent } from "@/lib/content";
 
 export type ContentFormState = { error?: string };
 
@@ -18,6 +18,10 @@ export async function updateContent(
   formData: FormData
 ): Promise<ContentFormState> {
   await requireAdmin();
+
+  // Contact email/phone are edited separately, under General Info — carry
+  // whatever's currently saved forward instead of wiping it here.
+  const existing = await getContent();
 
   const content: LandingContent = {
     heroTitle: str(formData, "heroTitle"),
@@ -44,8 +48,8 @@ export async function updateContent(
 
     gallery: [0, 1, 2, 3].map((i) => str(formData, `gallery-${i}`)),
 
-    contactEmail: str(formData, "contactEmail"),
-    contactPhone: str(formData, "contactPhone"),
+    contactEmail: existing.contactEmail,
+    contactPhone: existing.contactPhone,
   };
 
   try {
@@ -57,4 +61,28 @@ export async function updateContent(
   revalidatePath("/");
   revalidatePath("/admin/products");
   redirect("/admin/products");
+}
+
+export async function updateGeneralInfo(
+  _prevState: ContentFormState,
+  formData: FormData
+): Promise<ContentFormState> {
+  await requireAdmin();
+
+  const existing = await getContent();
+  const content: LandingContent = {
+    ...existing,
+    contactEmail: str(formData, "contactEmail"),
+    contactPhone: str(formData, "contactPhone"),
+  };
+
+  try {
+    await saveContent(content);
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Could not save" };
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin/general-info");
+  redirect("/admin/general-info");
 }

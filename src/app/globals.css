@@ -12,6 +12,20 @@ body {
   color: var(--foreground);
 }
 
+/* In-page nav links (#about, #products, #contact) scroll smoothly instead
+   of jumping. scroll-margin-top keeps the fixed header from covering the
+   target section's heading. Skipped for users who prefer reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+section[id],
+footer[id] {
+  scroll-margin-top: 110px;
+}
+
 button:not(:disabled) {
   cursor: pointer;
 }

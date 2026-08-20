@@ -172,7 +172,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         <img src={content.heroImage} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.45), rgba(4,12,17,0.72))' }} />
         <div data-parallax-fg data-parallax-hero-fg style={{ position: 'relative', textAlign: 'center', maxWidth: 1513 }}>
-          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(38px,6.4vw,100px)', lineHeight: 1.03, textWrap: 'pretty' as any, animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
+          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 760, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
             {content.heroTitle}
           </div>
           <div style={{ fontWeight: 400, fontSize: 'clamp(15px,1.4vw,21px)', lineHeight: 1.17, marginTop: 'clamp(24px,3vw,44px)', letterSpacing: '0.02em', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) .25s both' }}>

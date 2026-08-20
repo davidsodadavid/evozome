@@ -129,20 +129,6 @@ export default function ContentForm({
         </div>
       </div>
 
-      <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Contact</h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div>
-            <label className={labelClass}>Email</label>
-            <input type="email" name="contactEmail" defaultValue={content.contactEmail} className={fieldClass} />
-          </div>
-          <div>
-            <label className={labelClass}>Phone</label>
-            <input type="text" name="contactPhone" defaultValue={content.contactPhone} className={fieldClass} />
-          </div>
-        </div>
-      </div>
-
       {state.error && <p className="text-sm text-red-400">{state.error}</p>}
 
       <button
