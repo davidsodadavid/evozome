@@ -405,9 +405,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <div style={{ display: 'flex', flexDirection: 'column', fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.7 }}>
             <a href="#about">ABOUT</a>
             <a href="#">HOME</a>
-            <a href="#">LOCATIONS</a>
-            <a href="#contact">CONTACT</a>
-            <a href="#">VISIT</a>
           </div>
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>CONTACT</div>
