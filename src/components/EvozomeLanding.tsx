@@ -430,7 +430,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
                     type="email"
                     name="email"
                     placeholder="YOUR EMAIL"
-                    style={{ flex: 1, background: 'none', border: 'none', outline: 'none', fontWeight: 400, fontSize: 18, color: 'rgb(20,21,22)' }}
+                    style={{ flex: 1, background: 'rgb(226,224,213)', border: 'none', outline: 'none', fontWeight: 400, fontSize: 18, color: 'rgb(20,21,22)' }}
                   />
                   <button
                     type="submit"
