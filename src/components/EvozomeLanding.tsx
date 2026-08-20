@@ -304,29 +304,31 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* RESONANCE CHAMBER WINDOW */}
       <section style={{ background: '#E2E0D5', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
-        <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'center' }}>
+        <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 100, lineHeight: 1.03 }}>
             RESONANCE<br />CHAMBER
           </div>
-          <div style={{ aspectRatio: '16 / 9', display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden' }}>
-            <div style={{ overflow: 'hidden' }}>
-              <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <div>
+            <div style={{ aspectRatio: '16 / 9', display: 'grid', gridTemplateColumns: '1fr 1fr', overflow: 'hidden' }}>
+              <div style={{ overflow: 'hidden' }}>
+                <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              </div>
+              <div style={{ background: 'rgb(20,21,22)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
+              </div>
             </div>
-            <div style={{ background: 'rgb(20,21,22)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
+
+            <div style={{ marginTop: 'clamp(40px,5vw,64px)' }}>
+              <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(38px,5.6vw,80px)', lineHeight: 0.87, margin: '0 0 32px' }}>
+                BUILT TO HEAL
+              </h2>
+              <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0 }}>
+                {content.resonanceText}
+                <br /><br />
+                {content.resonanceText}
+              </p>
             </div>
           </div>
-        </div>
-
-        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0' }}>
-          <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(38px,5.6vw,80px)', lineHeight: 0.87, margin: '0 0 32px' }}>
-            BUILT TO HEAL
-          </h2>
-          <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 900 }}>
-            {content.resonanceText}
-            <br /><br />
-            {content.resonanceText}
-          </p>
         </div>
       </section>
 
