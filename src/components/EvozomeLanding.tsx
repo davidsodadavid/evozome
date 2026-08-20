@@ -396,7 +396,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       {/* RESONANCE CHAMBER WINDOW */}
       <section style={{ background: '#E2E0D5', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
-          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(40px,9vw,100px)', lineHeight: 1.03 }} />
+          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86 }} />
           <div data-reveal="unveil" data-zoom style={{ display: 'grid', gridTemplateColumns: twoCol, animationDelay: '.1s' }}>
             <div style={{ overflow: 'hidden', aspectRatio: isMobile ? '4 / 3' : undefined }}>
               <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
