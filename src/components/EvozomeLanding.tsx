@@ -323,7 +323,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           ))}
         </div>
 
-        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
+        <div style={{ maxWidth: 1600, margin: '50px auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
           {HEAL_CARDS.map((c, i) => (
             <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
               <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>A PRIVATE ARCHITECTURAL</div>
