@@ -86,16 +86,6 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Full-bleed image</h2>
-        <ImagePicker name="fullBleedImage" label="Photo" initialUrl={content.fullBleedImage} mediaLibrary={mediaLibrary} />
-      </div>
-
-      <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>&ldquo;Build to Heal&rdquo; background</h2>
-        <ImagePicker name="buildToHealImage" label="Photo" initialUrl={content.buildToHealImage} mediaLibrary={mediaLibrary} />
-      </div>
-
-      <div className={sectionClass}>
         <h2 className={sectionTitleClass}>Built to Heal — about</h2>
         <div>
           <label className={labelClass}>Text</label>

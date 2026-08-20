@@ -258,19 +258,15 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         </div>
       </section>
 
-      {/* FULL-BLEED IMAGE */}
-      <section style={{ height: 'clamp(420px,72vh,860px)', overflow: 'hidden' }}>
-        <img src={content.fullBleedImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-      </section>
-
       {/* BUILD TO HEAL (oversized italic) */}
-      <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        <img src={content.buildToHealImage} alt="" data-parallax style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,12,17,0.42)' }} />
-        <div data-parallax-fg style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
+      <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: 'rgb(20,21,22)' }}>
+        <div style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
           <div>BUILD TO</div>
-          <div>HEAL</div>
+          <div style={{ marginLeft: 'clamp(60px,10vw,200px)' }}>HEAL</div>
         </div>
+        <p data-reveal style={{ position: 'absolute', left: 'clamp(24px,4vw,64px)', bottom: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651 }}>
+          {content.resonanceText}
+        </p>
       </section>
 
       {/* BUILT TO HEAL intro + cards */}

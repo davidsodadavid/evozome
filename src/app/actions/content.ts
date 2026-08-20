@@ -38,9 +38,6 @@ export async function updateContent(
     resonanceImage1: str(formData, "resonanceImage1"),
     resonanceImage2: str(formData, "resonanceImage2"),
 
-    fullBleedImage: str(formData, "fullBleedImage"),
-    buildToHealImage: str(formData, "buildToHealImage"),
-
     aboutText: str(formData, "aboutText"),
     aboutImage1: str(formData, "aboutImage1"),
     aboutImage2: str(formData, "aboutImage2"),
