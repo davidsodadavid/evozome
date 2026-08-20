@@ -260,7 +260,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* RESONANCE CHAMBER */}
-      <section style={{ background: 'rgb(20,21,22)', color: '#fff', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section id="about" style={{ background: 'rgb(20,21,22)', color: '#fff', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
           <Letters text={'ARMADILLO\n2.0'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651, animationDelay: '.15s' }}>
@@ -341,7 +341,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* BUILT TO HEAL intro + cards */}
-      <section id="about" style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <Letters text={'BUILT TO\nHEAL'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 777, animationDelay: '.15s' }}>
