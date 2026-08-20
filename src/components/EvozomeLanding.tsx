@@ -208,13 +208,13 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           src={content.introImageLeft}
           alt=""
           data-reveal
-          style={{ position: 'absolute', left: 'clamp(16px,6vw,90px)', top: 'clamp(28px,7vh,80px)', width: 'clamp(90px,9vw,140px)', height: 'clamp(90px,9vw,140px)', objectFit: 'cover' }}
+          style={{ position: 'absolute', left: 100, top: 200, width: 550, height: 'auto' }}
         />
         <img
           src={content.introImageRight}
           alt=""
           data-reveal
-          style={{ position: 'absolute', right: 'clamp(16px,6vw,90px)', bottom: 'clamp(28px,7vh,80px)', width: 'clamp(90px,9vw,140px)', height: 'clamp(90px,9vw,140px)', objectFit: 'cover', animationDelay: '.12s' }}
+          style={{ position: 'absolute', right: 250, top: 100, width: 550, height: 'auto', animationDelay: '.12s' }}
         />
         <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
           <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
