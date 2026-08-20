@@ -7,8 +7,13 @@ export default async function AdminDashboardPage() {
 
   return (
     <>
-      <h1 className="mb-2 text-xl font-semibold text-white">Dashboard</h1>
-      <p className="mb-6 text-sm text-white/60">Welcome back.</p>
+      <div className="mb-6 flex items-center gap-4">
+        <img src="/evozome/logo-light.png" alt="" width={40} height={40} style={{ width: 40, height: 40 }} />
+        <div>
+          <h1 className="text-xl font-semibold text-white">Welcome to Evozome Admin Panel</h1>
+          <p className="text-sm text-white/60">Manage your site from here.</p>
+        </div>
+      </div>
 
       <div className="flex flex-wrap gap-5">
         <Link
