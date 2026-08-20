@@ -292,8 +292,14 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* ARMADILLO 2.0 FEATURE */}
-      <section style={{ height: 'clamp(380px,64vh,760px)', overflow: 'hidden' }}>
+      <section style={{ position: 'relative', height: 'clamp(380px,64vh,760px)', overflow: 'hidden' }}>
         <img src={content.armadilloImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
+          ARMADILLO / 2.0
+        </span>
+        <span style={{ position: 'absolute', bottom: 24, left: 24, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
+          ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND
+        </span>
       </section>
 
       {/* BUILT TO HEAL intro + cards */}
