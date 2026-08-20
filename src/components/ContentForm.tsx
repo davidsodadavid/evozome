@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useState, useActionState } from "react";
 import ImagePicker from "@/components/ImagePicker";
 import { updateContent, type ContentFormState } from "@/app/actions/content";
 import type { LandingContent } from "@/lib/content";
-import type { MediaKind } from "@/lib/uploads";
+import { isVideoUrl, type MediaKind } from "@/lib/uploads";
 
 type MediaItem = { key: string; url: string; filename: string; kind: MediaKind };
 
@@ -24,6 +24,7 @@ export default function ContentForm({
   mediaLibrary: MediaItem[];
 }) {
   const [state, formAction, pending] = useActionState(updateContent, initialState);
+  const [heroIsVideo, setHeroIsVideo] = useState(isVideoUrl(content.heroImage));
 
   return (
     <form action={formAction} className="flex flex-col gap-6">
@@ -43,7 +44,17 @@ export default function ContentForm({
           initialUrl={content.heroImage}
           mediaLibrary={mediaLibrary}
           kinds={["photo", "video"]}
+          onChange={(url) => setHeroIsVideo(isVideoUrl(url))}
         />
+        {heroIsVideo && (
+          <ImagePicker
+            name="heroImageMobile"
+            label="Mobile video (optional — falls back to the video above if left empty)"
+            initialUrl={content.heroImageMobile}
+            mediaLibrary={mediaLibrary}
+            kinds={["video"]}
+          />
+        )}
       </div>
 
       <div className={sectionClass}>

@@ -27,6 +27,7 @@ export async function updateContent(
     heroTitle: str(formData, "heroTitle"),
     heroSubtitle: str(formData, "heroSubtitle"),
     heroImage: str(formData, "heroImage"),
+    heroImageMobile: str(formData, "heroImageMobile"),
 
     resonanceText: str(formData, "resonanceText"),
 

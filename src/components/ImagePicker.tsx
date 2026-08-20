@@ -12,6 +12,7 @@ export default function ImagePicker({
   initialUrl,
   mediaLibrary,
   kinds = ["photo"],
+  onChange,
 }: {
   name: string;
   label: string;
@@ -20,8 +21,15 @@ export default function ImagePicker({
   /** Which media kinds this field accepts — pass ["photo","video"] for a
    * background slot that can hold either. Defaults to photo-only. */
   kinds?: MediaKind[];
+  /** Fired whenever the selected URL changes — lets a parent form react
+   * (e.g. reveal a mobile-video field only once a video is picked here). */
+  onChange?: (url: string) => void;
 }) {
-  const [url, setUrl] = useState(initialUrl);
+  const [url, setUrlState] = useState(initialUrl);
+  const setUrl = (next: string) => {
+    setUrlState(next);
+    onChange?.(next);
+  };
   const [error, setError] = useState<string | undefined>();
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [isPending, startTransition] = useTransition();

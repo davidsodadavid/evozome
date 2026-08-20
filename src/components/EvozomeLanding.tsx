@@ -104,6 +104,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const cardCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
   const galleryCol = isMobile ? '1fr 1fr' : 'repeat(4, 1fr)';
   const footerCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
+  const heroSrc = isMobile && content.heroImageMobile ? content.heroImageMobile : content.heroImage;
 
   return (
     <div style={{ background: 'rgb(20,21,22)', overflowX: 'hidden', fontFamily: "'Inter', system-ui, sans-serif", color: '#fff' }}>
@@ -170,9 +171,10 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* HERO */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '140px clamp(24px,4vw,64px) 80px', overflow: 'hidden' }}>
-        {isVideoUrl(content.heroImage) ? (
+        {isVideoUrl(heroSrc) ? (
           <video
-            src={content.heroImage}
+            key={heroSrc}
+            src={heroSrc}
             autoPlay
             muted
             loop
@@ -182,7 +184,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
-          <img src={content.heroImage} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={heroSrc} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         )}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.45), rgba(4,12,17,0.72))' }} />
         <div data-parallax-fg data-parallax-hero-fg style={{ position: 'relative', textAlign: 'center', maxWidth: 1513 }}>
