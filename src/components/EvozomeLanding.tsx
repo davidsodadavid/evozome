@@ -569,18 +569,18 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             </div>
           </div>
         </div>
-        <div style={{ maxWidth: 1600, margin: 'clamp(50px,6vw,90px) auto 0', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, fontWeight: 400, fontSize: 18 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 150 }}>
+        <div style={{ maxWidth: 1600, margin: 'clamp(50px,6vw,90px) auto 0', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 6 : 14, fontWeight: 400, fontSize: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: isMobile ? 14 : 150, order: isMobile ? 2 : 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(20,21,22)', display: 'block' }} />
               <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(20,21,22)', display: 'block' }} />
               <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(20,21,22)', display: 'block' }} />
             </div>
-            <span>© {new Date().getFullYear()} EVOZOME.</span>
+            <span style={isMobile ? { display: 'block', width: '100%' } : undefined}>© {new Date().getFullYear()} EVOZOME.</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, width: isMobile ? '100%' : undefined, order: isMobile ? 1 : 0 }}>
             <span>ALL RIGHTS RESERVED.</span>
-            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 120 }}>
+            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 'auto' }}>
               <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
             </a>
           </div>
