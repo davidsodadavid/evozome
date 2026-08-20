@@ -172,7 +172,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         <img src={content.heroImage} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.45), rgba(4,12,17,0.72))' }} />
         <div data-parallax-fg data-parallax-hero-fg style={{ position: 'relative', textAlign: 'center', maxWidth: 1513 }}>
-          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 760, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
+          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 950, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
             {content.heroTitle}
           </div>
           <div style={{ fontWeight: 400, fontSize: 'clamp(15px,1.4vw,21px)', lineHeight: 1.17, marginTop: 'clamp(24px,3vw,44px)', letterSpacing: '0.02em', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) .25s both' }}>
@@ -319,10 +319,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       <footer id="contact" style={{ background: 'rgb(226,224,213)', color: 'rgb(20,21,22)', padding: 'clamp(70px,8vw,120px) clamp(24px,4vw,64px) 40px' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: footerCol, gap: 'clamp(40px,5vw,80px)', alignItems: 'start' }}>
           <div style={{ display: 'flex', flexDirection: 'column', fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.7 }}>
-            <a href="#" aria-label="Evozome" style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
-              <img src="/evozome/logo-dark.png" alt="" width={28} height={28} style={{ width: 28, height: 28, display: 'block' }} />
-              <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: '0.22em' }}>EVOZOME</span>
-            </a>
             <a href="#about">ABOUT</a>
             <a href="#">HOME</a>
             <a href="#">LOCATIONS</a>
@@ -347,20 +343,21 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>FOLLOW</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-              <a href="#" style={{ display: 'block', width: 49, height: 49 }}><img src="/evozome/social-facebook.svg" alt="Facebook" style={{ width: '100%', height: '100%', display: 'block' }} /></a>
-              <a href="#" style={{ display: 'block', width: 49, height: 49 }}><img src="/evozome/social-x.svg" alt="X" style={{ width: '100%', height: '100%', display: 'block' }} /></a>
-              <a href="#" aria-label="Instagram" style={{ display: 'block', width: 49, height: 49 }}>
+              <a href="https://www.instagram.com/evozome" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ display: 'block', width: 49, height: 49 }}>
                 <svg viewBox="0 0 49 49" style={{ width: '100%', height: '100%', display: 'block' }}>
                   <path d="M24.5 0.5 C37.76 0.5 48.5 11.24 48.5 24.5 C48.5 37.76 37.76 48.5 24.5 48.5 C11.24 48.5 0.5 37.76 0.5 24.5 C0.5 11.24 11.24 0.5 24.5 0.5 Z M18.6 13.9 C15.99 13.9 13.9 15.99 13.9 18.6 L13.9 30.4 C13.9 33.01 15.99 35.1 18.6 35.1 L30.4 35.1 C33.01 35.1 35.1 33.01 35.1 30.4 L35.1 18.6 C35.1 15.99 33.01 13.9 30.4 13.9 L18.6 13.9 Z M18.6 16.6 L30.4 16.6 C31.51 16.6 32.4 17.49 32.4 18.6 L32.4 30.4 C32.4 31.51 31.51 32.4 30.4 32.4 L18.6 32.4 C17.49 32.4 16.6 31.51 16.6 30.4 L16.6 18.6 C16.6 17.49 17.49 16.6 18.6 16.6 Z M24.5 18.7 C21.3 18.7 18.7 21.3 18.7 24.5 C18.7 27.7 21.3 30.3 24.5 30.3 C27.7 30.3 30.3 27.7 30.3 24.5 C30.3 21.3 27.7 18.7 24.5 18.7 Z M24.5 21.4 C26.21 21.4 27.6 22.79 27.6 24.5 C27.6 26.21 26.21 27.6 24.5 27.6 C22.79 27.6 21.4 26.21 21.4 24.5 C21.4 22.79 22.79 21.4 24.5 21.4 Z M31.3 17.2 C30.53 17.2 29.9 17.83 29.9 18.6 C29.9 19.37 30.53 20 31.3 20 C32.07 20 32.7 19.37 32.7 18.6 C32.7 17.83 32.07 17.2 31.3 17.2 Z" fill="rgb(4,12,17)" fillRule="evenodd" />
                 </svg>
               </a>
-              <a href="#" style={{ display: 'block', width: 49, height: 49 }}><img src="/evozome/social-linkedin.svg" alt="LinkedIn" style={{ width: '100%', height: '100%', display: 'block' }} /></a>
+              <a href="https://www.linkedin.com/company/evozome?originalSubdomain=rs" target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: 49, height: 49 }}><img src="/evozome/social-linkedin.svg" alt="LinkedIn" style={{ width: '100%', height: '100%', display: 'block' }} /></a>
             </div>
           </div>
         </div>
         <div style={{ maxWidth: 1600, margin: 'clamp(50px,6vw,90px) auto 0', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, fontWeight: 400, fontSize: 18 }}>
           <div>{new Date().getFullYear()} — EVOZOME</div>
-          <div>ALL RIGHTS RESERVED</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span>ALL RIGHTS RESERVED</span>
+            <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
+          </div>
         </div>
       </footer>
     </div>
