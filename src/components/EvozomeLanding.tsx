@@ -320,8 +320,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
                 </h2>
                 <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, color: '#fff' }}>
                   {content.resonanceText}
-                  <br /><br />
-                  {content.resonanceText}
                 </p>
               </div>
             </div>
