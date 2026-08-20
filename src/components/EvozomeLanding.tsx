@@ -20,10 +20,31 @@ import { isVideoUrl } from '@/lib/uploads';
  */
 
 const HEAL_CARDS = [
-  { title: 'BUILT TO HEAL', weight: 400, inter: false, small: false },
-  { title: 'ARMADILLO / 2.0', inter: true, small: false },
-  { title: 'OUTSIDE', inter: true, small: false },
-  { title: 'ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND', inter: true, small: true },
+  {
+    title: 'BUILT TO HEAL',
+    weight: 400,
+    inter: false,
+    small: false,
+    more: 'EVERY SURFACE, ANGLE AND MATERIAL IS CHOSEN FOR ITS EFFECT ON THE NERVOUS SYSTEM — NATURAL WOOD FOR WARMTH, CURVED WALLS TO SOFTEN SOUND, AND FILTERED LIGHT THAT SHIFTS WITH THE HOUR. NOTHING IS DECORATIVE; EVERY DETAIL EARNS ITS PLACE BY SUPPORTING REST, FOCUS, OR RECOVERY.',
+  },
+  {
+    title: 'ARMADILLO / 2.0',
+    inter: true,
+    small: false,
+    more: 'THE SECOND-GENERATION SHELL IS BUILT FROM PREFABRICATED PANELS THAT ASSEMBLE ON SITE IN DAYS, NOT MONTHS. ITS DOME GEOMETRY DISTRIBUTES SOUND EVENLY FROM CENTER TO EDGE, SO A SINGLE VOICE OR INSTRUMENT FILLS THE WHOLE SPACE WITHOUT AMPLIFICATION.',
+  },
+  {
+    title: 'OUTSIDE',
+    inter: true,
+    small: false,
+    more: 'THE STRUCTURE IS DESIGNED TO DISAPPEAR INTO ITS SITE — RAISED ON A LIGHT FOOTPRINT, CLAD IN MATERIALS THAT WEATHER WITH THE LANDSCAPE, AND ORIENTED TO FRAME WHATEVER VIEW SURROUNDS IT, WHETHER FOREST, DESERT, OR COASTLINE.',
+  },
+  {
+    title: 'ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND',
+    inter: true,
+    small: true,
+    more: 'RESONANCE ARCHITECTURE DRAWS ON PRINCIPLES FOUND IN ANCIENT TEMPLES, CONCERT HALLS, AND SACRED GEOMETRY — WHERE THE SHAPE OF A ROOM IS ITSELF AN INSTRUMENT. EVOZOME APPLIES THE SAME THINKING TO A STRUCTURE YOU CAN BUILD IN YOUR OWN BACKYARD.',
+  },
 ];
 
 function Letters({ text, as: Tag = 'span', style }: { text: string; as?: any; style?: React.CSSProperties }) {
@@ -51,6 +72,7 @@ function Letters({ text, as: Tag = 'span', style }: { text: string; as?: any; st
 export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?: LandingContent }) {
   const [w, setW] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
   const [lightbox, setLightbox] = useState(-1);
+  const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     const onResize = () => setW(window.innerWidth);
@@ -100,7 +122,6 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const isMobile = w < 760;
   const isTablet = w >= 760 && w < 1100;
   const twoCol = isMobile ? '1fr' : '1fr 1fr';
-  const threeCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)';
   const cardCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
   const galleryCol = isMobile ? '1fr 1fr' : 'repeat(4, 1fr)';
   const footerCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
@@ -146,6 +167,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         [data-zoom] { overflow: hidden; }
         [data-zoom] img { transition: transform 1.1s cubic-bezier(.22,.61,.36,1), filter .8s ease; }
         [data-zoom]:hover img { transform: scale(1.06); filter: brightness(1.06); }
+        .evo-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.22,.61,.36,1); }
+        .evo-more.evo-open { grid-template-rows: 1fr; }
+        .evo-more > div { overflow: hidden; }
         @media (prefers-reduced-motion: reduce) {
           [data-parallax], [data-parallax-fg] { animation: none !important; transform: none !important; }
           [data-reveal], [data-letters] span span, [data-rule] { opacity: 1 !important; transform: none !important; clip-path: none !important; animation: none !important; }
@@ -247,11 +271,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               INSIDE
             </span>
           </div>
-          <div>
-            <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
-              <img src={content.resonanceImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-            </div>
-            <span style={{ display: 'block', marginTop: 20, fontWeight: 700, fontSize: 36, lineHeight: 0.87 }}>
+          <div data-reveal="unveil" data-zoom style={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
+            <img src={content.resonanceImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
               OUTSIDE
             </span>
           </div>
@@ -259,7 +281,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* BUILD TO HEAL (oversized italic) */}
-      <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: 'rgb(20,21,22)' }}>
+      <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgb(20,21,22)', paddingBottom: 'clamp(90px,12vh,160px)' }}>
         <div style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
           <div>BUILD TO</div>
           <div style={{ marginLeft: 'clamp(60px,10vw,200px)' }}>HEAL</div>
@@ -269,8 +291,15 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         </p>
       </section>
 
+      {/* ARMADILLO 2.0 FEATURE */}
+      <section style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) 0' }}>
+        <div style={{ height: 'clamp(380px,64vh,760px)', overflow: 'hidden' }}>
+          <img src={content.armadilloImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+      </section>
+
       {/* BUILT TO HEAL intro + cards */}
-      <section id="about" style={{ background: 'rgb(4,12,17)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section id="about" style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <Letters text={'BUILT TO\nHEAL'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 777, animationDelay: '.15s' }}>
@@ -283,73 +312,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </p>
         </div>
 
-        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
-          {HEAL_CARDS.map((c, i) => (
-            <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
-              <span data-rule style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'rgb(226,224,213)', animationDelay: (i * 0.12).toFixed(2) + 's' }} />
-              <div
-                style={{
-                  fontFamily: c.inter ? "'Inter', sans-serif" : "'Taviraj', serif",
-                  fontWeight: c.inter ? 700 : c.weight,
-                  fontSize: c.small ? 18 : 36,
-                  lineHeight: c.inter ? 1.17 : 0.86,
-                  color: '#fff',
-                }}
-              >
-                {c.title}
-              </div>
-              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>A PRIVATE ARCHITECTURAL</div>
-              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION</div>
-              <a href="#" style={{ fontWeight: 700, fontSize: 18, lineHeight: 1.17, borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}>READ MORE</a>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(18px,2vw,28px)' }}>
-          <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden' }}>
-            <img src={content.aboutImage1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-          <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
-            <img src={content.aboutImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
-        </div>
-      </section>
-
-      {/* PREMIUM MODULAR STRUCTURE */}
-      <section id="products" style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
-        <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 'clamp(38px,5.6vw,80px)', lineHeight: 0.87, textAlign: 'center', margin: '0 0 clamp(46px,6vw,80px)' }}>
-          PREMIUM MODULAR<br />STRUCTURE
-        </h2>
-        <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: threeCol, gap: 'clamp(18px,2vw,28px)' }}>
-          {content.products.map((p) => (
-            <a key={p.title} href="#" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <div style={{ aspectRatio: '3 / 4', overflow: 'hidden' }}>
-                <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              </div>
-              <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(30px,3.4vw,48px)', lineHeight: 0.86 }}>{p.title}</div>
-              <div style={{ fontWeight: 300, fontSize: 18, lineHeight: 1.17, opacity: 0.72 }}>{p.desc}</div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* ARMADILLO 2.0 FEATURE */}
-      <section style={{ background: 'rgb(4,12,17)', padding: 'clamp(80px,10vw,150px) 0 0' }}>
-        <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0 clamp(24px,4vw,64px)', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
-          <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(44px,6.4vw,90px)', lineHeight: 0.86, margin: 0 }}>ARMADILLO<br />2.0</h2>
-          <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 560 }}>
-            {content.armadilloText}
-          </p>
-        </div>
-        <div style={{ marginTop: 'clamp(50px,6vw,90px)', height: 'clamp(380px,64vh,760px)', overflow: 'hidden' }}>
-          <img src={content.armadilloImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        </div>
-      </section>
-
-      {/* OUTSIDE GALLERY */}
-      <section style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
-        <Letters text="OUTSIDE" as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(38px,5.6vw,80px)', lineHeight: 0.87, margin: '0 0 clamp(40px,5vw,70px)' }} />
-        <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
+        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
           {content.gallery.map((src, i) => (
             <div key={src} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
               <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -360,18 +323,39 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           ))}
         </div>
 
-        {lightbox >= 0 && (
-          <div onClick={() => setLightbox(-1)} style={{ position: 'fixed', inset: 0, zIndex: 90, background: 'rgba(4,12,17,0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(20px,5vw,80px)', animation: 'evoFade .32s ease both', cursor: 'zoom-out' }}>
-            <img src={content.gallery[lightbox]} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block', animation: 'evoRise .45s cubic-bezier(.22,.61,.36,1) both' }} />
-            <button onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous" style={{ position: 'absolute', left: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>‹</button>
-            <button onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next" style={{ position: 'absolute', right: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>›</button>
-            <button onClick={(e) => { e.stopPropagation(); setLightbox(-1); }} aria-label="Close" style={{ position: 'absolute', top: 'clamp(16px,3vw,40px)', right: 'clamp(16px,3vw,40px)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 22, color: 'rgb(226,224,213)', padding: 10 }}>×</button>
-            <div style={{ position: 'absolute', bottom: 'clamp(18px,3vw,40px)', left: '50%', transform: 'translateX(-50%)', fontWeight: 700, fontSize: 14, letterSpacing: '0.18em', color: 'rgb(226,224,213)' }}>
-              {String(lightbox + 1).padStart(2, '0')} / {String(content.gallery.length).padStart(2, '0')}
+        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
+          {HEAL_CARDS.map((c, i) => (
+            <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
+              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>A PRIVATE ARCHITECTURAL</div>
+              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION</div>
+              <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
+                <div>
+                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{c.more}</div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpenCards((prev) => ({ ...prev, [i]: !prev[i] }))}
+                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, fontSize: 18, lineHeight: 1.17, color: '#fff', borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}
+              >
+                {openCards[i] ? 'READ LESS' : 'READ MORE'}
+              </button>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </section>
+
+      {lightbox >= 0 && (
+        <div onClick={() => setLightbox(-1)} style={{ position: 'fixed', inset: 0, zIndex: 90, background: 'rgba(4,12,17,0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(20px,5vw,80px)', animation: 'evoFade .32s ease both', cursor: 'zoom-out' }}>
+          <img src={content.gallery[lightbox]} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block', animation: 'evoRise .45s cubic-bezier(.22,.61,.36,1) both' }} />
+          <button onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous" style={{ position: 'absolute', left: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>‹</button>
+          <button onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next" style={{ position: 'absolute', right: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>›</button>
+          <button onClick={(e) => { e.stopPropagation(); setLightbox(-1); }} aria-label="Close" style={{ position: 'absolute', top: 'clamp(16px,3vw,40px)', right: 'clamp(16px,3vw,40px)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 22, color: 'rgb(226,224,213)', padding: 10 }}>×</button>
+          <div style={{ position: 'absolute', bottom: 'clamp(18px,3vw,40px)', left: '50%', transform: 'translateX(-50%)', fontWeight: 700, fontSize: 14, letterSpacing: '0.18em', color: 'rgb(226,224,213)' }}>
+            {String(lightbox + 1).padStart(2, '0')} / {String(content.gallery.length).padStart(2, '0')}
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer id="contact" style={{ background: 'rgb(226,224,213)', color: 'rgb(20,21,22)', padding: 'clamp(70px,8vw,120px) clamp(24px,4vw,64px) 40px' }}>

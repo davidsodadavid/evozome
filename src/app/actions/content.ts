@@ -39,16 +39,7 @@ export async function updateContent(
     resonanceImage2: str(formData, "resonanceImage2"),
 
     aboutText: str(formData, "aboutText"),
-    aboutImage1: str(formData, "aboutImage1"),
-    aboutImage2: str(formData, "aboutImage2"),
 
-    products: [0, 1, 2].map((i) => ({
-      title: str(formData, `product-${i}-title`),
-      desc: str(formData, `product-${i}-desc`),
-      img: str(formData, `product-${i}-img`),
-    })),
-
-    armadilloText: str(formData, "armadilloText"),
     armadilloImage: str(formData, "armadilloImage"),
 
     gallery: [0, 1, 2, 3].map((i) => str(formData, `gallery-${i}`)),

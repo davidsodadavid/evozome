@@ -22,12 +22,7 @@ export type LandingContent = {
   resonanceImage2: string;
 
   aboutText: string;
-  aboutImage1: string;
-  aboutImage2: string;
 
-  products: { title: string; desc: string; img: string }[];
-
-  armadilloText: string;
   armadilloImage: string;
 
   gallery: string[];
@@ -56,17 +51,7 @@ export const DEFAULT_CONTENT: LandingContent = {
 
   aboutText:
     "A PRIVATE ARCHITECTURAL SANCTUARY FOR SOUND & TRANSFORMATION\nINSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION, THE RESONANCE CHAMBER IS A PRIVATE SANCTUARY WHERE ARCHITECTURE BECOMES AN INSTRUMENT.",
-  aboutImage1: "/evozome/img-03.png",
-  aboutImage2: "/evozome/img-04.png",
 
-  products: [
-    { title: "ARMADILLO 2.0", desc: "MODULAR RESONANCE CHAMBER", img: "/evozome/img-07.png" },
-    { title: "CHAMBER ONE", desc: "SOLO ACOUSTIC RETREAT", img: "/evozome/img-03.png" },
-    { title: "THE VESSEL", desc: "SHARED LISTENING SPACE", img: "/evozome/img-04.png" },
-  ],
-
-  armadilloText:
-    "A PREMIUM MODULAR STRUCTURE INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION.",
   armadilloImage: "/evozome/img-06.png",
 
   gallery: ["/evozome/img-08.png", "/evozome/img-09.png", "/evozome/img-10.png", "/evozome/img-11.png"],

@@ -91,54 +91,10 @@ export default function ContentForm({
           <label className={labelClass}>Text</label>
           <textarea name="aboutText" defaultValue={content.aboutText} rows={4} className={fieldClass} />
         </div>
-        <div className="flex flex-wrap gap-6">
-          <ImagePicker name="aboutImage1" label="Photo 1" initialUrl={content.aboutImage1} mediaLibrary={mediaLibrary} />
-          <ImagePicker name="aboutImage2" label="Photo 2" initialUrl={content.aboutImage2} mediaLibrary={mediaLibrary} />
-        </div>
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Premium Modular Structure — 3 products</h2>
-        <div className="flex flex-col gap-6">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="flex flex-col gap-3 rounded-md border border-white/10 p-4">
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div>
-                  <label className={labelClass}>Title</label>
-                  <input
-                    type="text"
-                    name={`product-${i}-title`}
-                    defaultValue={content.products[i]?.title}
-                    className={fieldClass}
-                  />
-                </div>
-                <div>
-                  <label className={labelClass}>Description</label>
-                  <input
-                    type="text"
-                    name={`product-${i}-desc`}
-                    defaultValue={content.products[i]?.desc}
-                    className={fieldClass}
-                  />
-                </div>
-              </div>
-              <ImagePicker
-                name={`product-${i}-img`}
-                label="Photo"
-                initialUrl={content.products[i]?.img ?? ""}
-                mediaLibrary={mediaLibrary}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Armadillo 2.0 feature</h2>
-        <div>
-          <label className={labelClass}>Text</label>
-          <textarea name="armadilloText" defaultValue={content.armadilloText} rows={3} className={fieldClass} />
-        </div>
+        <h2 className={sectionTitleClass}>Armadillo 2.0 feature photo</h2>
         <ImagePicker name="armadilloImage" label="Photo" initialUrl={content.armadilloImage} mediaLibrary={mediaLibrary} />
       </div>
 
