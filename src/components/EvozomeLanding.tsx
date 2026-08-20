@@ -353,7 +353,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </div>
         </div>
         <div style={{ maxWidth: 1600, margin: 'clamp(50px,6vw,90px) auto 0', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14, fontWeight: 400, fontSize: 18 }}>
-          <div>{new Date().getFullYear()} — EVOZOME</div>
+          <div>© {new Date().getFullYear()} EVOZOME.</div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span>ALL RIGHTS RESERVED.</span>
             <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 120 }}>
