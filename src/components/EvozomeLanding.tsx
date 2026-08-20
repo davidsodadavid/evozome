@@ -315,7 +315,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             <div style={{ background: 'rgb(20,21,22)', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 'clamp(32px,4vw,48px)', padding: 'clamp(32px,4vw,56px)' }}>
               <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
               <div>
-                <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(30px,3.6vw,52px)', lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
+                <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 36, lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
                   BUILT TO HEAL
                 </h2>
                 <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, color: '#fff' }}>
