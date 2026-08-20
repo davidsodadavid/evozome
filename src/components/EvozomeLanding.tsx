@@ -241,11 +241,19 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </p>
         </div>
         <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(18px,2vw,28px)' }}>
-          <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden' }}>
+          <div data-reveal="unveil" data-zoom style={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden' }}>
             <img src={content.resonanceImage1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
+              INSIDE
+            </span>
           </div>
-          <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
-            <img src={content.resonanceImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <div>
+            <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
+              <img src={content.resonanceImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            </div>
+            <span style={{ display: 'block', marginTop: 20, fontWeight: 700, fontSize: 36, lineHeight: 0.87 }}>
+              OUTSIDE
+            </span>
           </div>
         </div>
       </section>
