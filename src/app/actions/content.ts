@@ -47,7 +47,11 @@ export async function updateContent(
     armadilloImage: str(formData, "armadilloImage"),
     armadilloImageMobile: str(formData, "armadilloImageMobile"),
 
-    gallery: [0, 1, 2, 3].map((i) => str(formData, `gallery-${i}`)),
+    gallery: [0, 1, 2, 3].map((i) => ({
+      img: str(formData, `gallery-${i}-img`),
+      line1: str(formData, `gallery-${i}-line1`),
+      line2: str(formData, `gallery-${i}-line2`),
+    })),
 
     contactEmail: existing.contactEmail,
     contactPhone: existing.contactPhone,

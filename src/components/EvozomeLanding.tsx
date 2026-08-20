@@ -353,9 +353,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         </div>
 
         <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
-          {content.gallery.map((src, i) => (
-            <div key={src} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
-              <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          {content.gallery.map((g, i) => (
+            <div key={g.img + i} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
+              <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -366,8 +366,8 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         <div style={{ maxWidth: 1600, margin: '50px auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
           {HEAL_CARDS.map((c, i) => (
             <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
-              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>A PRIVATE ARCHITECTURAL</div>
-              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION</div>
+              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line1}</div>
+              <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line2}</div>
               <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
                 <div>
                   <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{c.more}</div>
@@ -387,7 +387,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {lightbox >= 0 && (
         <div onClick={() => setLightbox(-1)} style={{ position: 'fixed', inset: 0, zIndex: 90, background: 'rgba(4,12,17,0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(20px,5vw,80px)', animation: 'evoFade .32s ease both', cursor: 'zoom-out' }}>
-          <img src={content.gallery[lightbox]} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block', animation: 'evoRise .45s cubic-bezier(.22,.61,.36,1) both' }} />
+          <img src={content.gallery[lightbox]?.img} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block', animation: 'evoRise .45s cubic-bezier(.22,.61,.36,1) both' }} />
           <button onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous" style={{ position: 'absolute', left: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>‹</button>
           <button onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next" style={{ position: 'absolute', right: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>›</button>
           <button onClick={(e) => { e.stopPropagation(); setLightbox(-1); }} aria-label="Close" style={{ position: 'absolute', top: 'clamp(16px,3vw,40px)', right: 'clamp(16px,3vw,40px)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 22, color: 'rgb(226,224,213)', padding: 10 }}>×</button>

@@ -139,20 +139,41 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
-        <SectionHeader n={6} title="Built to Heal" hint="Closing section: intro text + the 4-photo gallery grid, above the READ MORE cards." />
+        <SectionHeader n={6} title="Built to Heal" hint="Closing section: intro text + the 4-photo gallery grid, each paired with the two lines shown in its READ MORE card below." />
         <div>
           <label className={labelClass}>Text</label>
           <textarea name="aboutText" defaultValue={content.aboutText} rows={4} className={fieldClass} />
         </div>
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-col gap-4">
           {[0, 1, 2, 3].map((i) => (
-            <ImagePicker
-              key={i}
-              name={`gallery-${i}`}
-              label={`Photo ${i + 1}`}
-              initialUrl={content.gallery[i] ?? ""}
-              mediaLibrary={mediaLibrary}
-            />
+            <div key={i} className="flex flex-col gap-3 rounded-md border border-white/10 p-4">
+              <ImagePicker
+                name={`gallery-${i}-img`}
+                label={`Photo ${i + 1}`}
+                initialUrl={content.gallery[i]?.img ?? ""}
+                mediaLibrary={mediaLibrary}
+              />
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div>
+                  <label className={labelClass}>Line 1</label>
+                  <input
+                    type="text"
+                    name={`gallery-${i}-line1`}
+                    defaultValue={content.gallery[i]?.line1}
+                    className={fieldClass}
+                  />
+                </div>
+                <div>
+                  <label className={labelClass}>Line 2</label>
+                  <input
+                    type="text"
+                    name={`gallery-${i}-line2`}
+                    defaultValue={content.gallery[i]?.line2}
+                    className={fieldClass}
+                  />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -33,7 +33,7 @@ export type LandingContent = {
    * armadilloImage is a video. Empty string means "use armadilloImage on mobile too". */
   armadilloImageMobile: string;
 
-  gallery: string[];
+  gallery: { img: string; line1: string; line2: string }[];
 
   contactEmail: string;
   contactPhone: string;
@@ -68,17 +68,35 @@ export const DEFAULT_CONTENT: LandingContent = {
   armadilloImage: "/evozome/img-06.png",
   armadilloImageMobile: "",
 
-  gallery: ["/evozome/img-08.png", "/evozome/img-09.png", "/evozome/img-10.png", "/evozome/img-11.png"],
+  gallery: [
+    { img: "/evozome/img-08.png", line1: "A PRIVATE ARCHITECTURAL", line2: "INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION" },
+    { img: "/evozome/img-09.png", line1: "A PRIVATE ARCHITECTURAL", line2: "INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION" },
+    { img: "/evozome/img-10.png", line1: "A PRIVATE ARCHITECTURAL", line2: "INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION" },
+    { img: "/evozome/img-11.png", line1: "A PRIVATE ARCHITECTURAL", line2: "INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION" },
+  ],
 
   contactEmail: "evozome@gmail.com",
   contactPhone: "381 4 239 249",
 };
 
 export async function getContent(): Promise<LandingContent> {
-  const stored = await getR2Json<LandingContent>(CONTENT_KEY);
+  const stored = await getR2Json<Record<string, unknown>>(CONTENT_KEY);
   if (!stored) return DEFAULT_CONTENT;
   // Shallow-merge so older saved documents missing newer fields still work.
-  return { ...DEFAULT_CONTENT, ...stored };
+  const merged = { ...DEFAULT_CONTENT, ...stored } as LandingContent;
+
+  // Migrate older documents where gallery was a plain string[] of photo URLs
+  // (before per-photo line1/line2 text existed) into the current shape.
+  const rawGallery = merged.gallery as unknown;
+  if (Array.isArray(rawGallery) && typeof rawGallery[0] === "string") {
+    merged.gallery = (rawGallery as string[]).map((img, i) => ({
+      img,
+      line1: DEFAULT_CONTENT.gallery[i]?.line1 ?? DEFAULT_CONTENT.gallery[0].line1,
+      line2: DEFAULT_CONTENT.gallery[i]?.line2 ?? DEFAULT_CONTENT.gallery[0].line2,
+    }));
+  }
+
+  return merged;
 }
 
 export async function saveContent(content: LandingContent) {
