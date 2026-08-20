@@ -204,18 +204,12 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* INTRO STATEMENT */}
       <section style={{ position: 'relative', background: 'rgb(20,21,22)', padding: 'clamp(90px,13vw,180px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
-        <img
-          src={content.introImageLeft}
-          alt=""
-          data-reveal
-          style={{ position: 'absolute', left: 100, top: 200, width: 385, height: 'auto' }}
-        />
-        <img
-          src={content.introImageRight}
-          alt=""
-          data-reveal
-          style={{ position: 'absolute', right: 60, top: 100, width: 385, height: 'auto', animationDelay: '.12s' }}
-        />
+        <div data-reveal style={{ position: 'absolute', left: 100, top: 300, width: 385 }}>
+          <img src={content.introImageLeft} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+        <div data-reveal style={{ position: 'absolute', right: 60, top: 100, width: 385, animationDelay: '.12s' }}>
+          <img src={content.introImageRight} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
         <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
           <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
             {content.introLabel.split('\n').map((line, i) => (
