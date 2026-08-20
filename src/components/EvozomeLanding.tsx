@@ -78,6 +78,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const [lightbox, setLightbox] = useState(-1);
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
   const [subscribeState, subscribeAction, subscribePending] = useActionState(subscribe, subscribeInitialState);
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     const onResize = () => setW(window.innerWidth);
@@ -126,6 +127,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
   const isMobile = w < 760;
   const isTablet = w >= 760 && w < 1100;
+  const isNavMobile = w < 769;
   const twoCol = isMobile ? '1fr' : '1fr 1fr';
   const cardCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
   const galleryCol = isMobile ? '1fr 1fr' : 'repeat(4, 1fr)';
@@ -183,20 +185,72 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       `}</style>
 
       {/* NAV */}
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', padding: '34px clamp(24px,4vw,64px)', background: 'transparent' }}>
-        <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-start', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
-          <a href="#">HOME</a>
-          <a href="#about">ABOUT</a>
-          <a href="#built-to-heal">BUILT TO HEAL</a>
-        </nav>
-        <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, padding: '0 clamp(18px,3vw,44px)' }}>
-          <img src="/evozome/logo-light.png" alt="" width={30} height={30} style={{ width: 30, height: 30, display: 'block' }} />
-          <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
-        </a>
-        <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
-          <a href="#contact">CONTACT</a>
-        </nav>
+      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: isNavMobile ? 'space-between' : undefined, padding: '34px clamp(24px,4vw,64px)', background: 'transparent' }}>
+        {isNavMobile ? (
+          <>
+            <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
+              <img src="/evozome/logo-light.png" alt="" width={38} height={38} style={{ width: 38, height: 38, display: 'block' }} />
+              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => setNavOpen(true)}
+              aria-label="Open menu"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 6 }}
+            >
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+              </svg>
+            </button>
+          </>
+        ) : (
+          <>
+            <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-start', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
+              <a href="#">HOME</a>
+              <a href="#about">ABOUT</a>
+              <a href="#built-to-heal">BUILT TO HEAL</a>
+            </nav>
+            <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, padding: '0 clamp(18px,3vw,44px)' }}>
+              <img src="/evozome/logo-light.png" alt="" width={30} height={30} style={{ width: 30, height: 30, display: 'block' }} />
+              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
+            </a>
+            <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
+              <a href="#contact">CONTACT</a>
+            </nav>
+          </>
+        )}
       </header>
+
+      {/* MOBILE NAV OVERLAY */}
+      {isNavMobile && navOpen && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgb(20,21,22)', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '34px clamp(24px,4vw,64px)' }}>
+            <a href="#" aria-label="Evozome" onClick={() => setNavOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <img src="/evozome/logo-light.png" alt="" width={38} height={38} style={{ width: 38, height: 38, display: 'block' }} />
+              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => setNavOpen(false)}
+              aria-label="Close menu"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 6 }}
+            >
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </svg>
+            </button>
+          </div>
+          <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 28, fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(32px,8vw,52px)' }}>
+            <a href="#" onClick={() => setNavOpen(false)}>HOME</a>
+            <a href="#about" onClick={() => setNavOpen(false)}>ABOUT</a>
+            <a href="#built-to-heal" onClick={() => setNavOpen(false)}>BUILT TO HEAL</a>
+            <a href="#contact" onClick={() => setNavOpen(false)}>CONTACT</a>
+          </nav>
+        </div>
+      )}
 
       {/* HERO */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '140px clamp(24px,4vw,64px) 80px', overflow: 'hidden' }}>
