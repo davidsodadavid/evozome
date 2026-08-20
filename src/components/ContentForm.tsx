@@ -4,8 +4,9 @@ import { useActionState } from "react";
 import ImagePicker from "@/components/ImagePicker";
 import { updateContent, type ContentFormState } from "@/app/actions/content";
 import type { LandingContent } from "@/lib/content";
+import type { MediaKind } from "@/lib/uploads";
 
-type MediaItem = { key: string; url: string; filename: string };
+type MediaItem = { key: string; url: string; filename: string; kind: MediaKind };
 
 const initialState: ContentFormState = {};
 
@@ -36,7 +37,13 @@ export default function ContentForm({
           <label className={labelClass}>Subtitle</label>
           <textarea name="heroSubtitle" defaultValue={content.heroSubtitle} rows={2} className={fieldClass} />
         </div>
-        <ImagePicker name="heroImage" label="Background photo" initialUrl={content.heroImage} mediaLibrary={mediaLibrary} />
+        <ImagePicker
+          name="heroImage"
+          label="Background photo or video"
+          initialUrl={content.heroImage}
+          mediaLibrary={mediaLibrary}
+          kinds={["photo", "video"]}
+        />
       </div>
 
       <div className={sectionClass}>

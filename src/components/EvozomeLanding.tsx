@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { DEFAULT_CONTENT, type LandingContent } from '@/lib/content';
+import { isVideoUrl } from '@/lib/uploads';
 
 /**
  * Evozome full landing page. Section order: nav, hero, resonance chamber,
@@ -169,7 +170,20 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* HERO */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '140px clamp(24px,4vw,64px) 80px', overflow: 'hidden' }}>
-        <img src={content.heroImage} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        {isVideoUrl(content.heroImage) ? (
+          <video
+            src={content.heroImage}
+            autoPlay
+            muted
+            loop
+            playsInline
+            data-parallax
+            data-parallax-hero
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <img src={content.heroImage} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        )}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.45), rgba(4,12,17,0.72))' }} />
         <div data-parallax-fg data-parallax-hero-fg style={{ position: 'relative', textAlign: 'center', maxWidth: 1513 }}>
           <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 950, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>

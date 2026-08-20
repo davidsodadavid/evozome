@@ -22,3 +22,12 @@ export function constraintsFor(kind: MediaKind) {
     ? { allowed: ALLOWED_PHOTO_TYPES, maxBytes: MAX_PHOTO_BYTES, maxMb: MAX_PHOTO_MB }
     : { allowed: ALLOWED_VIDEO_TYPES, maxBytes: MAX_VIDEO_BYTES, maxMb: MAX_VIDEO_MB };
 }
+
+const VIDEO_EXTENSIONS = [".mp4", ".webm", ".mov"];
+
+// Content fields that can hold either a photo or a video URL (e.g. the hero
+// background) don't store which kind was picked — this tells them apart by
+// extension at render time.
+export function isVideoUrl(url: string) {
+  return VIDEO_EXTENSIONS.some((ext) => url.toLowerCase().endsWith(ext));
+}

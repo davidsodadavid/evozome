@@ -14,7 +14,15 @@ export default async function EditProductPage({
   const product = PRODUCTS.find((p) => p.id === id);
   if (!product) notFound();
 
-  const [content, photos] = await Promise.all([getContent(), listR2Objects("media/photos/")]);
+  const [content, photos, videos] = await Promise.all([
+    getContent(),
+    listR2Objects("media/photos/"),
+    listR2Objects("media/videos/"),
+  ]);
+  const mediaLibrary = [
+    ...photos.map((p) => ({ ...p, kind: "photo" as const })),
+    ...videos.map((v) => ({ ...v, kind: "video" as const })),
+  ];
 
   return (
     <>
@@ -25,7 +33,7 @@ export default async function EditProductPage({
         </Link>
       </div>
 
-      <ContentForm content={content} mediaLibrary={photos} />
+      <ContentForm content={content} mediaLibrary={mediaLibrary} />
     </>
   );
 }
