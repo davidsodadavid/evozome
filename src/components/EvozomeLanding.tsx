@@ -580,7 +580,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, width: isMobile ? '100%' : undefined, order: isMobile ? 1 : 0 }}>
             <span>ALL RIGHTS RESERVED.</span>
-            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 'auto' }}>
+            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: isMobile ? 'auto' : 120 }}>
               <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
             </a>
           </div>
