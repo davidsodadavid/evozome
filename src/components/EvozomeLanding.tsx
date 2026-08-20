@@ -202,6 +202,42 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         </div>
       </section>
 
+      {/* INTRO STATEMENT */}
+      <section style={{ position: 'relative', background: 'rgb(20,21,22)', padding: 'clamp(90px,13vw,180px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
+        <img
+          src={content.introImageLeft}
+          alt=""
+          data-reveal
+          style={{ position: 'absolute', left: 'clamp(16px,6vw,90px)', top: 'clamp(28px,7vh,80px)', width: 'clamp(90px,9vw,140px)', height: 'clamp(90px,9vw,140px)', objectFit: 'cover' }}
+        />
+        <img
+          src={content.introImageRight}
+          alt=""
+          data-reveal
+          style={{ position: 'absolute', right: 'clamp(16px,6vw,90px)', bottom: 'clamp(28px,7vh,80px)', width: 'clamp(90px,9vw,140px)', height: 'clamp(90px,9vw,140px)', objectFit: 'cover', animationDelay: '.12s' }}
+        />
+        <div style={{ position: 'relative', maxWidth: 860, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
+          <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
+            {content.introLabel.split('\n').map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
+          </div>
+          <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(28px,4.2vw,54px)', lineHeight: 1.15, animationDelay: '.1s' }}>
+            {content.introStatement}
+          </div>
+          <a
+            href="#contact"
+            data-reveal
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 12, border: '1px solid rgb(226,224,213)', borderRadius: 0, padding: '15px 30px', fontWeight: 700, fontSize: 14, letterSpacing: '0.12em', animationDelay: '.2s' }}
+          >
+            CONTACT US <span aria-hidden>→</span>
+          </a>
+        </div>
+      </section>
+
       {/* RESONANCE CHAMBER */}
       <section style={{ background: 'rgb(226,224,213)', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>

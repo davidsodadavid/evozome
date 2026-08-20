@@ -58,6 +58,22 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
+        <h2 className={sectionTitleClass}>Intro statement (below hero)</h2>
+        <div>
+          <label className={labelClass}>Small label text</label>
+          <textarea name="introLabel" defaultValue={content.introLabel} rows={2} className={fieldClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Statement</label>
+          <textarea name="introStatement" defaultValue={content.introStatement} rows={3} className={fieldClass} />
+        </div>
+        <div className="flex flex-wrap gap-6">
+          <ImagePicker name="introImageLeft" label="Left photo" initialUrl={content.introImageLeft} mediaLibrary={mediaLibrary} />
+          <ImagePicker name="introImageRight" label="Right photo" initialUrl={content.introImageRight} mediaLibrary={mediaLibrary} />
+        </div>
+      </div>
+
+      <div className={sectionClass}>
         <h2 className={sectionTitleClass}>Resonance Chamber</h2>
         <div>
           <label className={labelClass}>Text</label>

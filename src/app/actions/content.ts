@@ -29,6 +29,11 @@ export async function updateContent(
     heroImage: str(formData, "heroImage"),
     heroImageMobile: str(formData, "heroImageMobile"),
 
+    introLabel: str(formData, "introLabel"),
+    introStatement: str(formData, "introStatement"),
+    introImageLeft: str(formData, "introImageLeft"),
+    introImageRight: str(formData, "introImageRight"),
+
     resonanceText: str(formData, "resonanceText"),
 
     fullBleedImage: str(formData, "fullBleedImage"),

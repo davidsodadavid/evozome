@@ -11,6 +11,12 @@ export type LandingContent = {
    * heroImage is a video. Empty string means "use heroImage on mobile too". */
   heroImageMobile: string;
 
+  // Intro statement section — sits right below the hero.
+  introLabel: string;
+  introStatement: string;
+  introImageLeft: string;
+  introImageRight: string;
+
   resonanceText: string;
 
   fullBleedImage: string;
@@ -38,6 +44,11 @@ export const DEFAULT_CONTENT: LandingContent = {
   heroSubtitle: "ARCHITECTURE THAT CHANGES HOW\nYOU EXPERIENCE NATURE AND SOUND",
   heroImage: "/evozome/img-01.png",
   heroImageMobile: "",
+
+  introLabel: "ARCHITECTURE THAT CHANGES HOW\nYOU EXPERIENCE NATURE AND SOUND",
+  introStatement: "A PRIVATE SANCTUARY DESIGNED FOR PEOPLE WHO VALUE SPACE, SILENCE AND TIMELESS DESIGN.",
+  introImageLeft: "/evozome/img-03.png",
+  introImageRight: "/evozome/img-04.png",
 
   resonanceText:
     "RESONANCE CHAMBER — IS A SPACE OR STRUCTURE DESIGNED TO AMPLIFY, SHAPE, AND TRANSMIT SOUND AND VIBRATION THROUGH ITS GEOMETRY, MATERIALS, AND ACOUSTIC PROPERTIES. THE CONCEPT ORIGINATES FROM ACOUSTICS, ARCHITECTURE, AND MUSICAL INSTRUMENTS, ENVIRONMENTS.",
