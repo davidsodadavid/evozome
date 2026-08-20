@@ -33,6 +33,12 @@ export default function AdminProductsPage() {
               <Link href={product.href} className="text-sm text-white/60 hover:underline">
                 View
               </Link>
+              <Link
+                href={`/admin/products/${product.id}/edit`}
+                className="text-sm font-medium text-white hover:underline"
+              >
+                Edit
+              </Link>
             </div>
           </li>
         ))}

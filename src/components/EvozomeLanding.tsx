@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { DEFAULT_CONTENT, type LandingContent } from '@/lib/content';
 
 /**
  * Evozome full landing page. Section order: nav, hero, resonance chamber,
@@ -12,13 +13,10 @@ import { useEffect, useState, useCallback } from 'react';
  * `animation-timeline`, with an `evoDrift` ambient fallback for browsers
  * without support). JS only toggles the `.evo-in` class via
  * IntersectionObserver and splits heading text into per-letter spans.
+ *
+ * Copy and images come from `content` (editable at /admin/products) —
+ * everything else here is fixed page structure/design.
  */
-
-const PRODUCTS = [
-  { title: 'ARMADILLO 2.0', desc: 'MODULAR RESONANCE CHAMBER', img: '/evozome/img-07.png' },
-  { title: 'CHAMBER ONE', desc: 'SOLO ACOUSTIC RETREAT', img: '/evozome/img-03.png' },
-  { title: 'THE VESSEL', desc: 'SHARED LISTENING SPACE', img: '/evozome/img-04.png' },
-];
 
 const HEAL_CARDS = [
   { title: 'BUILT TO HEAL', weight: 400, inter: false, small: false },
@@ -26,8 +24,6 @@ const HEAL_CARDS = [
   { title: 'OUTSIDE', inter: true, small: false },
   { title: 'ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND', inter: true, small: true },
 ];
-
-const GALLERY = ['/evozome/img-08.png', '/evozome/img-09.png', '/evozome/img-10.png', '/evozome/img-11.png'];
 
 function Letters({ text, as: Tag = 'span', style }: { text: string; as?: any; style?: React.CSSProperties }) {
   const lines = text.split('\n');
@@ -51,7 +47,7 @@ function Letters({ text, as: Tag = 'span', style }: { text: string; as?: any; st
   );
 }
 
-export default function EvozomeLanding() {
+export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?: LandingContent }) {
   const [w, setW] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
   const [lightbox, setLightbox] = useState(-1);
 
@@ -86,8 +82,8 @@ export default function EvozomeLanding() {
   }, []);
 
   const step = useCallback((dir: number) => {
-    setLightbox((cur) => (cur < 0 ? cur : (cur + dir + GALLERY.length) % GALLERY.length));
-  }, []);
+    setLightbox((cur) => (cur < 0 ? cur : (cur + dir + content.gallery.length) % content.gallery.length));
+  }, [content.gallery.length]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -173,14 +169,19 @@ export default function EvozomeLanding() {
 
       {/* HERO */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '140px clamp(24px,4vw,64px) 80px', overflow: 'hidden' }}>
-        <img src="/evozome/img-01.png" alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={content.heroImage} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.45), rgba(4,12,17,0.72))' }} />
         <div data-parallax-fg data-parallax-hero-fg style={{ position: 'relative', textAlign: 'center', maxWidth: 1513 }}>
           <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(38px,6.4vw,100px)', lineHeight: 1.03, textWrap: 'pretty' as any, animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
-            A PRIVATE SANCTUARY DESIGNED FOR PEOPLE WHO VALUE SPACE, SILENCE AND TIMELESS DESIGN.
+            {content.heroTitle}
           </div>
           <div style={{ fontWeight: 400, fontSize: 'clamp(15px,1.4vw,21px)', lineHeight: 1.17, marginTop: 'clamp(24px,3vw,44px)', letterSpacing: '0.02em', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) .25s both' }}>
-            ARCHITECTURE THAT CHANGES HOW<br />YOU EXPERIENCE NATURE AND SOUND
+            {content.heroSubtitle.split('\n').map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -190,19 +191,19 @@ export default function EvozomeLanding() {
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
           <Letters text={'RESONANCE\nCHAMBER'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651, animationDelay: '.15s' }}>
-            RESONANCE CHAMBER — IS A SPACE OR STRUCTURE DESIGNED TO AMPLIFY, SHAPE, AND TRANSMIT SOUND AND VIBRATION THROUGH ITS GEOMETRY, MATERIALS, AND ACOUSTIC PROPERTIES. THE CONCEPT ORIGINATES FROM ACOUSTICS, ARCHITECTURE, AND MUSICAL INSTRUMENTS, ENVIRONMENTS.
+            {content.resonanceText}
           </p>
         </div>
       </section>
 
       {/* FULL-BLEED IMAGE */}
       <section style={{ height: 'clamp(420px,72vh,860px)', overflow: 'hidden' }}>
-        <img src="/evozome/img-02.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <img src={content.fullBleedImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       </section>
 
       {/* BUILD TO HEAL (oversized italic) */}
       <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        <img src="/evozome/img-05.png" alt="" data-parallax style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={content.buildToHealImage} alt="" data-parallax style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(4,12,17,0.42)' }} />
         <div data-parallax-fg style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
           <div>BUILD TO</div>
@@ -215,8 +216,12 @@ export default function EvozomeLanding() {
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <Letters text={'BUILT TO\nHEAL'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 777, animationDelay: '.15s' }}>
-            A PRIVATE ARCHITECTURAL SANCTUARY FOR SOUND &amp; TRANSFORMATION<br />
-            INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION, THE RESONANCE CHAMBER IS A PRIVATE SANCTUARY WHERE ARCHITECTURE BECOMES AN INSTRUMENT.
+            {content.aboutText.split('\n').map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </p>
         </div>
 
@@ -244,10 +249,10 @@ export default function EvozomeLanding() {
 
         <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(18px,2vw,28px)' }}>
           <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden' }}>
-            <img src="/evozome/img-03.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={content.aboutImage1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
-            <img src="/evozome/img-04.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={content.aboutImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
         </div>
       </section>
@@ -258,7 +263,7 @@ export default function EvozomeLanding() {
           PREMIUM MODULAR<br />STRUCTURE
         </h2>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: threeCol, gap: 'clamp(18px,2vw,28px)' }}>
-          {PRODUCTS.map((p) => (
+          {content.products.map((p) => (
             <a key={p.title} href="#" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               <div style={{ aspectRatio: '3 / 4', overflow: 'hidden' }}>
                 <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -275,11 +280,11 @@ export default function EvozomeLanding() {
         <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0 clamp(24px,4vw,64px)', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
           <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 300, fontSize: 'clamp(44px,6.4vw,90px)', lineHeight: 0.86, margin: 0 }}>ARMADILLO<br />2.0</h2>
           <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 560 }}>
-            A PREMIUM MODULAR STRUCTURE INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION.
+            {content.armadilloText}
           </p>
         </div>
         <div style={{ marginTop: 'clamp(50px,6vw,90px)', height: 'clamp(380px,64vh,760px)', overflow: 'hidden' }}>
-          <img src="/evozome/img-06.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <img src={content.armadilloImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
       </section>
 
@@ -287,7 +292,7 @@ export default function EvozomeLanding() {
       <section style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <Letters text="OUTSIDE" as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(38px,5.6vw,80px)', lineHeight: 0.87, margin: '0 0 clamp(40px,5vw,70px)' }} />
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
-          {GALLERY.map((src, i) => (
+          {content.gallery.map((src, i) => (
             <div key={src} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
               <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
@@ -299,12 +304,12 @@ export default function EvozomeLanding() {
 
         {lightbox >= 0 && (
           <div onClick={() => setLightbox(-1)} style={{ position: 'fixed', inset: 0, zIndex: 90, background: 'rgba(4,12,17,0.94)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(20px,5vw,80px)', animation: 'evoFade .32s ease both', cursor: 'zoom-out' }}>
-            <img src={GALLERY[lightbox]} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block', animation: 'evoRise .45s cubic-bezier(.22,.61,.36,1) both' }} />
+            <img src={content.gallery[lightbox]} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block', animation: 'evoRise .45s cubic-bezier(.22,.61,.36,1) both' }} />
             <button onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous" style={{ position: 'absolute', left: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>‹</button>
             <button onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next" style={{ position: 'absolute', right: 'clamp(14px,3vw,44px)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 30, color: 'rgb(226,224,213)', padding: 14 }}>›</button>
             <button onClick={(e) => { e.stopPropagation(); setLightbox(-1); }} aria-label="Close" style={{ position: 'absolute', top: 'clamp(16px,3vw,40px)', right: 'clamp(16px,3vw,40px)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 22, color: 'rgb(226,224,213)', padding: 10 }}>×</button>
             <div style={{ position: 'absolute', bottom: 'clamp(18px,3vw,40px)', left: '50%', transform: 'translateX(-50%)', fontWeight: 700, fontSize: 14, letterSpacing: '0.18em', color: 'rgb(226,224,213)' }}>
-              {String(lightbox + 1).padStart(2, '0')} / {String(GALLERY.length).padStart(2, '0')}
+              {String(lightbox + 1).padStart(2, '0')} / {String(content.gallery.length).padStart(2, '0')}
             </div>
           </div>
         )}
@@ -327,8 +332,8 @@ export default function EvozomeLanding() {
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>CONTACT</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>
-              <a href="mailto:evozome@gmail.com">evozome@gmail.com</a>
-              <a href="tel:+3814239249">381 4 239 249</a>
+              <a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>
+              <a href={`tel:+${content.contactPhone.replace(/[^\d]/g, '')}`}>{content.contactPhone}</a>
               <a href="#" style={{ fontWeight: 700, borderBottom: '1px solid rgb(20,21,22)', paddingBottom: 6, alignSelf: 'flex-start', marginTop: 6 }}>CONTACT US</a>
             </div>
           </div>

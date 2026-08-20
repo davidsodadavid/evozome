@@ -3,6 +3,7 @@ import {
   PutObjectCommand,
   DeleteObjectCommand,
   ListObjectsV2Command,
+  GetObjectCommand,
 } from "@aws-sdk/client-s3";
 
 const BUCKET = process.env.R2_BUCKET_NAME;
@@ -106,4 +107,32 @@ export async function deleteR2Object(key: string) {
   } catch {
     // Object already gone — nothing left to clean up.
   }
+}
+
+// Small JSON-document helpers — used to persist editable page content
+// (see src/lib/content.ts) in R2 without needing a database.
+export async function getR2Json<T>(key: string): Promise<T | null> {
+  if (!BUCKET) return null;
+  try {
+    const result = await getClient().send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
+    const text = await result.Body?.transformToString();
+    return text ? (JSON.parse(text) as T) : null;
+  } catch {
+    // Object doesn't exist yet, or R2 is unreachable — caller falls back to defaults.
+    return null;
+  }
+}
+
+export async function putR2Json(key: string, value: unknown) {
+  if (!BUCKET) {
+    throw new Error("R2 is not configured");
+  }
+  await getClient().send(
+    new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: key,
+      Body: JSON.stringify(value, null, 2),
+      ContentType: "application/json",
+    })
+  );
 }
