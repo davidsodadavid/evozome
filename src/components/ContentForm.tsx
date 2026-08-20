@@ -14,7 +14,19 @@ const fieldClass =
   "w-full rounded-md border border-white/15 bg-transparent px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none";
 const labelClass = "mb-1 block text-sm font-medium text-white/80";
 const sectionClass = "flex flex-col gap-4 rounded-xl border border-white/10 bg-white/5 p-5";
-const sectionTitleClass = "text-sm font-semibold uppercase tracking-wider text-white/50";
+const sectionNumClass = "text-xs font-bold uppercase tracking-widest text-white/40";
+const sectionTitleClass = "text-base font-semibold text-white";
+const hintClass = "text-xs text-white/40";
+
+function SectionHeader({ n, title, hint }: { n: number; title: string; hint?: string }) {
+  return (
+    <div>
+      <div className={sectionNumClass}>Section {n}</div>
+      <h2 className={sectionTitleClass}>{title}</h2>
+      {hint && <p className={hintClass}>{hint}</p>}
+    </div>
+  );
+}
 
 export default function ContentForm({
   content,
@@ -25,11 +37,14 @@ export default function ContentForm({
 }) {
   const [state, formAction, pending] = useActionState(updateContent, initialState);
   const [heroIsVideo, setHeroIsVideo] = useState(isVideoUrl(content.heroImage));
+  const [armadilloIsVideo, setArmadilloIsVideo] = useState(isVideoUrl(content.armadilloImage));
 
   return (
     <form action={formAction} className="flex flex-col gap-6">
+      {/* Order below matches top-to-bottom order on the live page. */}
+
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Hero</h2>
+        <SectionHeader n={1} title="Hero" hint="First thing visitors see — full-screen photo or video." />
         <div>
           <label className={labelClass}>Title</label>
           <textarea name="heroTitle" defaultValue={content.heroTitle} rows={2} className={fieldClass} />
@@ -58,7 +73,7 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Intro statement (below hero)</h2>
+        <SectionHeader n={2} title="Intro statement" hint="Small label + big statement + Contact Us button, right below the hero." />
         <div>
           <label className={labelClass}>Small label text</label>
           <textarea name="introLabel" defaultValue={content.introLabel} rows={2} className={fieldClass} />
@@ -74,37 +89,53 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Resonance Chamber (Armadillo 2.0)</h2>
+        <SectionHeader
+          n={3}
+          title="Resonance Chamber — Armadillo 2.0"
+          hint="Heading + text + the INSIDE/OUTSIDE photo pair. This text is also reused lower down in the oversized “BUILD TO HEAL” section and inside the Resonance Chamber window (Section 5)."
+        />
         <div>
           <label className={labelClass}>Text</label>
           <textarea name="resonanceText" defaultValue={content.resonanceText} rows={4} className={fieldClass} />
         </div>
         <div className="flex flex-wrap gap-6">
-          <ImagePicker name="resonanceImage1" label="Photo 1" initialUrl={content.resonanceImage1} mediaLibrary={mediaLibrary} />
-          <ImagePicker name="resonanceImage2" label="Photo 2" initialUrl={content.resonanceImage2} mediaLibrary={mediaLibrary} />
+          <ImagePicker name="resonanceImage1" label="Left photo (INSIDE)" initialUrl={content.resonanceImage1} mediaLibrary={mediaLibrary} />
+          <ImagePicker name="resonanceImage2" label="Right photo (OUTSIDE)" initialUrl={content.resonanceImage2} mediaLibrary={mediaLibrary} />
         </div>
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Built to Heal — about</h2>
-        <div>
-          <label className={labelClass}>Text</label>
-          <textarea name="aboutText" defaultValue={content.aboutText} rows={4} className={fieldClass} />
-        </div>
+        <SectionHeader n={4} title="Armadillo 2.0 feature" hint="Full-height (100vh) photo or video with ARMADILLO / 2.0 overlaid top-left." />
+        <ImagePicker
+          name="armadilloImage"
+          label="Background photo or video"
+          initialUrl={content.armadilloImage}
+          mediaLibrary={mediaLibrary}
+          kinds={["photo", "video"]}
+          onChange={(url) => setArmadilloIsVideo(isVideoUrl(url))}
+        />
+        {armadilloIsVideo && (
+          <ImagePicker
+            name="armadilloImageMobile"
+            label="Mobile video (optional — falls back to the video above if left empty)"
+            initialUrl={content.armadilloImageMobile}
+            mediaLibrary={mediaLibrary}
+            kinds={["video"]}
+          />
+        )}
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Armadillo 2.0 feature photo</h2>
-        <ImagePicker name="armadilloImage" label="Photo" initialUrl={content.armadilloImage} mediaLibrary={mediaLibrary} />
-      </div>
-
-      <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Resonance Chamber window (photo | logo)</h2>
+        <SectionHeader n={5} title="Resonance Chamber window" hint="Split panel: photo on the left, logo + BUILT TO HEAL text on the right." />
         <ImagePicker name="windowImage" label="Photo (left half)" initialUrl={content.windowImage} mediaLibrary={mediaLibrary} />
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Outside gallery — 4 photos</h2>
+        <SectionHeader n={6} title="Built to Heal" hint="Closing section: intro text + the 4-photo gallery grid, above the READ MORE cards." />
+        <div>
+          <label className={labelClass}>Text</label>
+          <textarea name="aboutText" defaultValue={content.aboutText} rows={4} className={fieldClass} />
+        </div>
         <div className="flex flex-wrap gap-6">
           {[0, 1, 2, 3].map((i) => (
             <ImagePicker

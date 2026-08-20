@@ -27,6 +27,9 @@ export type LandingContent = {
   windowImage: string;
 
   armadilloImage: string;
+  /** Optional mobile-only override for armadilloImage — only meaningful when
+   * armadilloImage is a video. Empty string means "use armadilloImage on mobile too". */
+  armadilloImageMobile: string;
 
   gallery: string[];
 
@@ -58,6 +61,7 @@ export const DEFAULT_CONTENT: LandingContent = {
   windowImage: "/evozome/img-06.png",
 
   armadilloImage: "/evozome/img-06.png",
+  armadilloImageMobile: "",
 
   gallery: ["/evozome/img-08.png", "/evozome/img-09.png", "/evozome/img-10.png", "/evozome/img-11.png"],
 

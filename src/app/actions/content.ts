@@ -43,6 +43,7 @@ export async function updateContent(
     windowImage: str(formData, "windowImage"),
 
     armadilloImage: str(formData, "armadilloImage"),
+    armadilloImageMobile: str(formData, "armadilloImageMobile"),
 
     gallery: [0, 1, 2, 3].map((i) => str(formData, `gallery-${i}`)),
 

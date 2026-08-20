@@ -126,6 +126,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const galleryCol = isMobile ? '1fr 1fr' : 'repeat(4, 1fr)';
   const footerCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
   const heroSrc = isMobile && content.heroImageMobile ? content.heroImageMobile : content.heroImage;
+  const armadilloSrc = isMobile && content.armadilloImageMobile ? content.armadilloImageMobile : content.armadilloImage;
 
   return (
     <div style={{ background: 'rgb(20,21,22)', overflowX: 'hidden', fontFamily: "'Inter', system-ui, sans-serif", color: '#fff' }}>
@@ -292,8 +293,20 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* ARMADILLO 2.0 FEATURE */}
-      <section style={{ position: 'relative', height: 'clamp(380px,64vh,760px)', overflow: 'hidden' }}>
-        <img src={content.armadilloImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        {isVideoUrl(armadilloSrc) ? (
+          <video
+            key={armadilloSrc}
+            src={armadilloSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <img src={armadilloSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        )}
         <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
           ARMADILLO / 2.0
         </span>
