@@ -214,7 +214,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           src={content.introImageRight}
           alt=""
           data-reveal
-          style={{ position: 'absolute', right: 250, top: 100, width: 550, height: 'auto', animationDelay: '.12s' }}
+          style={{ position: 'absolute', right: 60, top: 100, width: 550, height: 'auto', animationDelay: '.12s' }}
         />
         <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
           <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
