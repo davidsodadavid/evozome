@@ -233,12 +233,20 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* RESONANCE CHAMBER */}
-      <section style={{ background: 'rgb(226,224,213)', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section style={{ background: 'rgb(20,21,22)', color: '#fff', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
-          <Letters text={'RESONANCE\nCHAMBER'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
+          <Letters text={'ARMADILLO\n2.0'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651, animationDelay: '.15s' }}>
             {content.resonanceText}
           </p>
+        </div>
+        <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(18px,2vw,28px)' }}>
+          <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden' }}>
+            <img src={content.resonanceImage1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
+          <div data-reveal="unveil" data-zoom style={{ aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
+            <img src={content.resonanceImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          </div>
         </div>
       </section>
 

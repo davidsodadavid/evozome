@@ -74,10 +74,14 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
-        <h2 className={sectionTitleClass}>Resonance Chamber</h2>
+        <h2 className={sectionTitleClass}>Resonance Chamber (Armadillo 2.0)</h2>
         <div>
           <label className={labelClass}>Text</label>
           <textarea name="resonanceText" defaultValue={content.resonanceText} rows={4} className={fieldClass} />
+        </div>
+        <div className="flex flex-wrap gap-6">
+          <ImagePicker name="resonanceImage1" label="Photo 1" initialUrl={content.resonanceImage1} mediaLibrary={mediaLibrary} />
+          <ImagePicker name="resonanceImage2" label="Photo 2" initialUrl={content.resonanceImage2} mediaLibrary={mediaLibrary} />
         </div>
       </div>
 

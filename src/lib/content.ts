@@ -18,6 +18,8 @@ export type LandingContent = {
   introImageRight: string;
 
   resonanceText: string;
+  resonanceImage1: string;
+  resonanceImage2: string;
 
   fullBleedImage: string;
   buildToHealImage: string;
@@ -52,6 +54,8 @@ export const DEFAULT_CONTENT: LandingContent = {
 
   resonanceText:
     "RESONANCE CHAMBER — IS A SPACE OR STRUCTURE DESIGNED TO AMPLIFY, SHAPE, AND TRANSMIT SOUND AND VIBRATION THROUGH ITS GEOMETRY, MATERIALS, AND ACOUSTIC PROPERTIES. THE CONCEPT ORIGINATES FROM ACOUSTICS, ARCHITECTURE, AND MUSICAL INSTRUMENTS, ENVIRONMENTS.",
+  resonanceImage1: "https://pub-9230832a19fe46b3b1f291f153cea0ef.r2.dev/media/photos/154242dc-7488-497e-8ca4-7266e15fdff7.webp",
+  resonanceImage2: "https://pub-9230832a19fe46b3b1f291f153cea0ef.r2.dev/media/photos/0cfe9e4b-77c0-429d-a8b0-2adba6c2804d.webp",
 
   fullBleedImage: "/evozome/img-02.png",
   buildToHealImage: "/evozome/img-05.png",
