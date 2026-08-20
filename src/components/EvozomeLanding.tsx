@@ -285,7 +285,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       <section style={{ position: 'relative', minHeight: 'clamp(440px,76vh,900px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgb(20,21,22)', paddingBottom: 'clamp(90px,12vh,160px)' }}>
         <div style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
           <div style={{ marginRight: 'clamp(60px,10vw,200px)' }}>BUILD TO</div>
-          <div style={{ marginLeft: 'clamp(140px,20vw,400px)' }}>HEAL</div>
+          <div style={{ marginLeft: 'clamp(90px,12vw,240px)' }}>HEAL</div>
         </div>
         <p data-reveal style={{ position: 'absolute', left: 'clamp(24px,4vw,64px)', bottom: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651 }}>
           {content.resonanceText}
@@ -329,10 +329,10 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
               <div>
                 <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 36, lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
-                  BUILT TO HEAL
+                  {content.windowHeading}
                 </h2>
                 <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, color: '#fff' }}>
-                  {content.resonanceText}
+                  {content.windowText}
                 </p>
               </div>
             </div>

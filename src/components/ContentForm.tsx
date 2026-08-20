@@ -92,7 +92,7 @@ export default function ContentForm({
         <SectionHeader
           n={3}
           title="Resonance Chamber — Armadillo 2.0"
-          hint="Heading + text + the INSIDE/OUTSIDE photo pair. This text is also reused lower down in the oversized “BUILD TO HEAL” section and inside the Resonance Chamber window (Section 5)."
+          hint="Heading + text + the INSIDE/OUTSIDE photo pair. This text is also reused lower down in the oversized “BUILD TO HEAL” section."
         />
         <div>
           <label className={labelClass}>Text</label>
@@ -126,8 +126,16 @@ export default function ContentForm({
       </div>
 
       <div className={sectionClass}>
-        <SectionHeader n={5} title="Resonance Chamber window" hint="Split panel: photo on the left, logo + BUILT TO HEAL text on the right." />
+        <SectionHeader n={5} title="Resonance Chamber window" hint="Split panel: photo on the left, logo + heading + text on the right." />
         <ImagePicker name="windowImage" label="Photo (left half)" initialUrl={content.windowImage} mediaLibrary={mediaLibrary} />
+        <div>
+          <label className={labelClass}>Heading</label>
+          <input type="text" name="windowHeading" defaultValue={content.windowHeading} className={fieldClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Text</label>
+          <textarea name="windowText" defaultValue={content.windowText} rows={4} className={fieldClass} />
+        </div>
       </div>
 
       <div className={sectionClass}>

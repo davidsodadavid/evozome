@@ -41,6 +41,8 @@ export async function updateContent(
     aboutText: str(formData, "aboutText"),
 
     windowImage: str(formData, "windowImage"),
+    windowHeading: str(formData, "windowHeading"),
+    windowText: str(formData, "windowText"),
 
     armadilloImage: str(formData, "armadilloImage"),
     armadilloImageMobile: str(formData, "armadilloImageMobile"),
