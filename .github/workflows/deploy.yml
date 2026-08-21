@@ -1,0 +1,56 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Never run two deploys at once; queue instead of cancelling so a deploy is never half-applied
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Assemble standalone artifact
+        run: |
+          cp -r public .next/standalone/public
+          cp -r .next/static .next/standalone/.next/static
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Upload release
+        run: |
+          RELEASE=${GITHUB_SHA::8}
+          rsync -az --delete .next/standalone/ \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/srv/evozome/releases/$RELEASE/"
+
+      - name: Activate release
+        run: |
+          RELEASE=${GITHUB_SHA::8}
+          ssh "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "
+            ln -sfn /srv/evozome/releases/$RELEASE /srv/evozome/current &&
+            pm2 startOrReload /srv/evozome/ecosystem.config.js &&
+            pm2 save &&
+            cd /srv/evozome/releases && ls -1t | tail -n +4 | xargs -r rm -rf --
+          "
