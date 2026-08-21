@@ -4,6 +4,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Self-contained production build (server.js + traced node_modules) for VPS deploys
   output: "standalone",
+  // bcryptjs ships a dual ESM/CJS package.json that Next's file tracer
+  // fails to follow, silently dropping it from the standalone build and
+  // breaking the login server action at runtime. Force it in explicitly.
+  outputFileTracingIncludes: {
+    "/**": ["./node_modules/bcryptjs/**"],
+  },
   turbopack: {
     // A stray lockfile in a parent directory makes Next mis-detect the workspace root
     root: path.join(__dirname),
