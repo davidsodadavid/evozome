@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useActionState } from 'react';
+import { useEffect, useState, useCallback, useRef, useActionState } from 'react';
 import { DEFAULT_CONTENT, type LandingContent } from '@/lib/content';
 import { isVideoUrl } from '@/lib/uploads';
 import { subscribe, type SubscribeState } from '@/app/actions/subscribe';
@@ -79,6 +79,8 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
   const [subscribeState, subscribeAction, subscribePending] = useActionState(subscribe, subscribeInitialState);
   const [navOpen, setNavOpen] = useState(false);
+  const [healSlide, setHealSlide] = useState(0);
+  const touchStartXRef = useRef<number | null>(null);
 
   useEffect(() => {
     const onResize = () => setW(window.innerWidth);
@@ -268,24 +270,27 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         )}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.22), rgba(4,12,17,0.4))' }} />
         <div
-          data-parallax-fg
-          data-parallax-hero-fg
           style={
             isMobile
-              ? { position: 'absolute', top: '80vh', left: '50%', transform: 'translate(-50%,-50%)', width: '100%', textAlign: 'center', maxWidth: 1513, padding: '0 clamp(24px,4vw,64px)' }
+              ? { position: 'absolute', top: '80vh', left: 0, right: 0, transform: 'translateY(-50%)', textAlign: 'center', padding: '0 clamp(24px,4vw,64px)' }
               : { position: 'relative', textAlign: 'center', maxWidth: 1513 }
           }
         >
-          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 950, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
-            {content.heroTitle}
-          </div>
-          <div style={{ fontWeight: 400, fontSize: 'clamp(15px,1.4vw,21px)', lineHeight: 1.17, marginTop: 'clamp(24px,3vw,44px)', letterSpacing: '0.02em', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) .25s both' }}>
-            {content.heroSubtitle.split('\n').map((line, i) => (
-              <span key={i}>
-                {i > 0 && <br />}
-                {line}
-              </span>
-            ))}
+          {/* data-parallax-fg/-hero-fg drive a CSS scroll animation on `transform`,
+              which would override the positioning transform above if placed on the
+              same element — kept on this inner wrapper instead so both apply. */}
+          <div data-parallax-fg data-parallax-hero-fg>
+            <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 950, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
+              {content.heroTitle}
+            </div>
+            <div style={{ fontWeight: 400, fontSize: 'clamp(15px,1.4vw,21px)', lineHeight: 1.17, marginTop: 'clamp(24px,3vw,44px)', letterSpacing: '0.02em', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) .25s both' }}>
+              {content.heroSubtitle.split('\n').map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -363,9 +368,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           padding: isMobile ? 'clamp(40px,6vh,64px) 0 clamp(48px,7vh,72px)' : '0 0 clamp(90px,12vh,160px)',
         }}
       >
-        <div style={{ position: 'relative', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, textAlign: 'center' }}>
+        <div style={{ position: 'relative', width: '100%', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, padding: '0 clamp(24px,4vw,64px)' }}>
           <div style={{ textAlign: 'left' }}>BUILD TO</div>
-          <div style={{ marginLeft: 'clamp(160px,22vw,440px)' }}>HEAL</div>
+          <div style={{ textAlign: 'right' }}>HEAL</div>
         </div>
         <p
           data-reveal
@@ -411,7 +416,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
             <div style={{ background: 'rgb(14,15,16)', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 'clamp(32px,4vw,48px)', padding: 'clamp(32px,4vw,56px)' }}>
-              <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
+              <img src="/evozome/logo-light.png" alt="Evozome" width={46} height={46} style={{ width: 46, height: 46, display: 'block' }} />
               <div data-reveal style={{ animationDelay: '.25s' }}>
                 <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 36, lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
                   {content.windowHeading}
@@ -439,34 +444,63 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </p>
         </div>
 
-        {isMobile ? (
-          <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: '1fr', gap: 'clamp(28px,3.4vw,52px)' }}>
-            {content.gallery.map((g, i) => (
-              <div key={g.img + i} style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-                <div data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
-                  <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                  <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                <div data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
-                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{g.line1}</div>
-                  <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{g.line2}</div>
-                  <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
-                    <div>
-                      <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{HEAL_CARDS[i]?.more}</div>
+        {isNarrow ? (
+          <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0' }}>
+            <div
+              onTouchStart={(e) => { touchStartXRef.current = e.touches[0].clientX; }}
+              onTouchEnd={(e) => {
+                const startX = touchStartXRef.current;
+                touchStartXRef.current = null;
+                if (startX == null) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                if (Math.abs(dx) < 40) return;
+                const last = content.gallery.length - 1;
+                setHealSlide((s) => (dx < 0 ? Math.min(s + 1, last) : Math.max(s - 1, 0)));
+              }}
+              style={{ overflow: 'hidden' }}
+            >
+              <div style={{ display: 'flex', transform: `translateX(-${healSlide * 100}%)`, transition: 'transform .45s cubic-bezier(.22,.61,.36,1)' }}>
+                {content.gallery.map((g, i) => (
+                  <div key={g.img + i} style={{ flex: '0 0 100%', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 22 }}>
+                    <div data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative' }}>
+                      <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                      <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 22, position: 'relative' }}>
+                      <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{g.line1}</div>
+                      <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{g.line2}</div>
+                      <div className={`evo-more${openCards[i] ? ' evo-open' : ''}`}>
+                        <div>
+                          <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, paddingTop: 4 }}>{HEAL_CARDS[i]?.more}</div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setOpenCards((prev) => ({ ...prev, [i]: !prev[i] }))}
+                        style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, fontSize: 18, lineHeight: 1.17, color: '#fff', borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}
+                      >
+                        {openCards[i] ? 'READ LESS' : 'READ MORE'}
+                      </button>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setOpenCards((prev) => ({ ...prev, [i]: !prev[i] }))}
-                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 700, fontSize: 18, lineHeight: 1.17, color: '#fff', borderBottom: '1px solid rgb(226,224,213)', paddingBottom: 6, alignSelf: 'flex-start' }}
-                  >
-                    {openCards[i] ? 'READ LESS' : 'READ MORE'}
-                  </button>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 32 }}>
+              {content.gallery.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => setHealSlide(i)}
+                  style={{ background: 'none', border: 'none', padding: 8, cursor: 'pointer' }}
+                >
+                  <span style={{ display: 'block', width: healSlide === i ? 28 : 16, height: 2, background: healSlide === i ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all .3s ease' }} />
+                </button>
+              ))}
+            </div>
           </div>
         ) : (
           <>
@@ -525,6 +559,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             <a href="#about">ABOUT</a>
             <a href="#built-to-heal">BUILT TO HEAL</a>
           </div>
+          {isMobile && <div style={{ width: '100%', height: 1, background: 'rgb(14,15,16)' }} />}
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>CONTACT</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>
@@ -568,28 +603,30 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </div>
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>FOLLOW</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-              <a href="https://www.instagram.com/evozome" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ display: 'block', width: 49, height: 49 }}>
-                <svg viewBox="0 0 49 49" style={{ width: '100%', height: '100%', display: 'block' }}>
-                  <path d="M24.5 0.5 C37.76 0.5 48.5 11.24 48.5 24.5 C48.5 37.76 37.76 48.5 24.5 48.5 C11.24 48.5 0.5 37.76 0.5 24.5 C0.5 11.24 11.24 0.5 24.5 0.5 Z M18.6 13.9 C15.99 13.9 13.9 15.99 13.9 18.6 L13.9 30.4 C13.9 33.01 15.99 35.1 18.6 35.1 L30.4 35.1 C33.01 35.1 35.1 33.01 35.1 30.4 L35.1 18.6 C35.1 15.99 33.01 13.9 30.4 13.9 L18.6 13.9 Z M18.6 16.6 L30.4 16.6 C31.51 16.6 32.4 17.49 32.4 18.6 L32.4 30.4 C32.4 31.51 31.51 32.4 30.4 32.4 L18.6 32.4 C17.49 32.4 16.6 31.51 16.6 30.4 L16.6 18.6 C16.6 17.49 17.49 16.6 18.6 16.6 Z M24.5 18.7 C21.3 18.7 18.7 21.3 18.7 24.5 C18.7 27.7 21.3 30.3 24.5 30.3 C27.7 30.3 30.3 27.7 30.3 24.5 C30.3 21.3 27.7 18.7 24.5 18.7 Z M24.5 21.4 C26.21 21.4 27.6 22.79 27.6 24.5 C27.6 26.21 26.21 27.6 24.5 27.6 C22.79 27.6 21.4 26.21 21.4 24.5 C21.4 22.79 22.79 21.4 24.5 21.4 Z M31.3 17.2 C30.53 17.2 29.9 17.83 29.9 18.6 C29.9 19.37 30.53 20 31.3 20 C32.07 20 32.7 19.37 32.7 18.6 C32.7 17.83 32.07 17.2 31.3 17.2 Z" fill="rgb(4,12,17)" fillRule="evenodd" />
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/company/evozome?originalSubdomain=rs" target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: 49, height: 49 }}><img src="/evozome/social-linkedin.svg" alt="LinkedIn" style={{ width: '100%', height: '100%', display: 'block' }} /></a>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: isNarrow ? 'space-between' : 'flex-start' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
+                <a href="https://www.instagram.com/evozome" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ display: 'block', width: 49, height: 49 }}>
+                  <svg viewBox="0 0 49 49" style={{ width: '100%', height: '100%', display: 'block' }}>
+                    <path d="M24.5 0.5 C37.76 0.5 48.5 11.24 48.5 24.5 C48.5 37.76 37.76 48.5 24.5 48.5 C11.24 48.5 0.5 37.76 0.5 24.5 C0.5 11.24 11.24 0.5 24.5 0.5 Z M18.6 13.9 C15.99 13.9 13.9 15.99 13.9 18.6 L13.9 30.4 C13.9 33.01 15.99 35.1 18.6 35.1 L30.4 35.1 C33.01 35.1 35.1 33.01 35.1 30.4 L35.1 18.6 C35.1 15.99 33.01 13.9 30.4 13.9 L18.6 13.9 Z M18.6 16.6 L30.4 16.6 C31.51 16.6 32.4 17.49 32.4 18.6 L32.4 30.4 C32.4 31.51 31.51 32.4 30.4 32.4 L18.6 32.4 C17.49 32.4 16.6 31.51 16.6 30.4 L16.6 18.6 C16.6 17.49 17.49 16.6 18.6 16.6 Z M24.5 18.7 C21.3 18.7 18.7 21.3 18.7 24.5 C18.7 27.7 21.3 30.3 24.5 30.3 C27.7 30.3 30.3 27.7 30.3 24.5 C30.3 21.3 27.7 18.7 24.5 18.7 Z M24.5 21.4 C26.21 21.4 27.6 22.79 27.6 24.5 C27.6 26.21 26.21 27.6 24.5 27.6 C22.79 27.6 21.4 26.21 21.4 24.5 C21.4 22.79 22.79 21.4 24.5 21.4 Z M31.3 17.2 C30.53 17.2 29.9 17.83 29.9 18.6 C29.9 19.37 30.53 20 31.3 20 C32.07 20 32.7 19.37 32.7 18.6 C32.7 17.83 32.07 17.2 31.3 17.2 Z" fill="rgb(4,12,17)" fillRule="evenodd" />
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/company/evozome?originalSubdomain=rs" target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: 49, height: 49 }}><img src="/evozome/social-linkedin.svg" alt="LinkedIn" style={{ width: '100%', height: '100%', display: 'block' }} /></a>
+              </div>
+              {isNarrow && (
+                <a href="#" aria-label="Back to top" style={{ display: 'block' }}>
+                  <img src="/evozome/logo-dark.png" alt="Evozome" width={49} height={49} style={{ width: 49, height: 49, display: 'block' }} />
+                </a>
+              )}
             </div>
           </div>
         </div>
-        <div style={{ maxWidth: 1600, margin: isMobile ? '24px auto 0' : 'clamp(50px,6vw,90px) auto 0', paddingTop: isMobile ? 12 : 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 6 : 14, fontWeight: 400, fontSize: 18 }}>
-          <div style={{ display: 'flex', alignItems: 'center', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: isMobile ? 14 : 150, order: isMobile ? 2 : 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(14,15,16)', display: 'block' }} />
-              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(14,15,16)', display: 'block' }} />
-              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(14,15,16)', display: 'block' }} />
-            </div>
-            <span style={isMobile ? { display: 'block', width: '100%' } : undefined}>© {new Date().getFullYear()} EVOZOME.</span>
+        <div style={{ maxWidth: 1600, margin: isMobile ? '24px auto 0' : 'clamp(50px,6vw,90px) auto 0', paddingTop: isMobile ? 12 : 24, position: isMobile ? 'relative' : undefined, display: 'flex', justifyContent: isMobile ? 'center' : 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 6 : 14, fontWeight: 400, fontSize: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : undefined, flexWrap: isMobile ? 'wrap' : 'nowrap', order: isMobile ? 2 : 0 }}>
+            <span style={isMobile ? { display: 'block', width: '100%', textAlign: 'center' } : undefined}>© {new Date().getFullYear()} EVOZOME.</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, width: isMobile ? '100%' : undefined, order: isMobile ? 1 : 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : undefined, gap: 10, width: isMobile ? '100%' : undefined, order: isMobile ? 1 : 0 }}>
             <span>ALL RIGHTS RESERVED.</span>
-            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: isMobile ? 'auto' : 120 }}>
+            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: isMobile ? undefined : 120, position: isMobile ? 'absolute' : undefined, right: isMobile ? 0 : undefined, top: isMobile ? '50%' : undefined, transform: isMobile ? 'translateY(-50%)' : undefined }}>
               <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
             </a>
           </div>
