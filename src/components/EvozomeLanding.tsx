@@ -128,6 +128,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const isMobile = w < 760;
   const isTablet = w >= 760 && w < 1100;
   const isNavMobile = w < 769;
+  const isNarrow = w <= 1024;
   const twoCol = isMobile ? '1fr' : '1fr 1fr';
   const cardCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
   const galleryCol = isMobile ? '1fr 1fr' : 'repeat(4, 1fr)';
@@ -136,7 +137,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const armadilloSrc = isMobile && content.armadilloImageMobile ? content.armadilloImageMobile : content.armadilloImage;
 
   return (
-    <div style={{ background: 'rgb(20,21,22)', overflowX: 'hidden', fontFamily: "'Inter', system-ui, sans-serif", color: '#fff' }}>
+    <div style={{ background: 'rgb(14,15,16)', overflowX: 'hidden', fontFamily: "'Inter', system-ui, sans-serif", color: '#fff' }}>
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Taviraj:ital,wght@0,200;0,300;0,400;0,600;1,200&family=Inter:wght@300;400;700&display=swap');
         a { color: inherit; text-decoration: none; }
@@ -196,13 +197,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               type="button"
               onClick={() => setNavOpen(true)}
               aria-label="Open menu"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 6 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 6, fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}
             >
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </svg>
+              MENU
             </button>
           </>
         ) : (
@@ -225,7 +222,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* MOBILE NAV OVERLAY */}
       {isNavMobile && navOpen && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgb(20,21,22)', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgb(14,15,16)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '34px clamp(24px,4vw,64px)' }}>
             <a href="#" aria-label="Evozome" onClick={() => setNavOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <img src="/evozome/logo-light.png" alt="" width={38} height={38} style={{ width: 38, height: 38, display: 'block' }} />
@@ -269,9 +266,17 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         ) : (
           <img src={heroSrc} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         )}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.45), rgba(4,12,17,0.72))' }} />
-        <div data-parallax-fg data-parallax-hero-fg style={{ position: 'relative', textAlign: 'center', maxWidth: 1513 }}>
-          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 950, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.22), rgba(4,12,17,0.4))' }} />
+        <div
+          data-parallax-fg
+          data-parallax-hero-fg
+          style={
+            isMobile
+              ? { position: 'absolute', top: '80vh', left: '50%', transform: 'translate(-50%,-50%)', width: '100%', textAlign: 'center', maxWidth: 1513, padding: '0 clamp(24px,4vw,64px)' }
+              : { position: 'relative', textAlign: 'center', maxWidth: 1513 }
+          }
+        >
+          <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(38px,6.4vw,80px)', lineHeight: 1.03, textWrap: 'pretty' as any, maxWidth: 950, margin: '0 auto', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) both' }}>
             {content.heroTitle}
           </div>
           <div style={{ fontWeight: 400, fontSize: 'clamp(15px,1.4vw,21px)', lineHeight: 1.17, marginTop: 'clamp(24px,3vw,44px)', letterSpacing: '0.02em', animation: 'evoRise 1s cubic-bezier(.22,.61,.36,1) .25s both' }}>
@@ -286,24 +291,28 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* INTRO STATEMENT */}
-      <section style={{ position: 'relative', background: 'rgb(20,21,22)', padding: 'clamp(90px,13vw,180px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
-        <div data-reveal="unveil" style={{ position: 'absolute', left: isMobile ? 20 : 100, top: isMobile ? 300 : 600, width: isMobile ? 192 : 385 }}>
-          <img src={content.introImageLeft} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
-        </div>
+      <section style={{ position: 'relative', background: 'rgb(14,15,16)', padding: 'clamp(90px,13vw,180px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
+        {!isNarrow && (
+          <div data-reveal="unveil" style={{ position: 'absolute', left: isMobile ? 20 : 100, top: isMobile ? 300 : 600, width: isMobile ? 192 : 385 }}>
+            <img src={content.introImageLeft} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
+        )}
         {!isMobile && (
           <div data-reveal="unveil" style={{ position: 'absolute', right: 60, top: 100, width: 385, animationDelay: '.12s' }}>
             <img src={content.introImageRight} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
         )}
         <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
-          <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
-            {content.introLabel.split('\n').map((line, i) => (
-              <span key={i}>
-                {i > 0 && <br />}
-                {line}
-              </span>
-            ))}
-          </div>
+          {!isNarrow && (
+            <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
+              {content.introLabel.split('\n').map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </span>
+              ))}
+            </div>
+          )}
           <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontSize: 'clamp(34px,9vw,100px)', lineHeight: 1.15, animationDelay: '.1s' }}>
             {content.introStatement}
           </div>
@@ -318,9 +327,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* RESONANCE CHAMBER */}
-      <section id="about" style={{ background: 'rgb(20,21,22)', color: '#fff', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section id="about" style={{ background: 'rgb(14,15,16)', color: '#fff', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
-          <Letters text={'ARMADILLO\n2.0'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
+          <Letters text={'ARMADILLO\n2.0'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontStyle: 'italic', fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651, animationDelay: '.15s' }}>
             {content.resonanceText}
           </p>
@@ -350,7 +359,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'rgb(20,21,22)',
+          background: 'rgb(14,15,16)',
           padding: isMobile ? 'clamp(40px,6vh,64px) 0 clamp(48px,7vh,72px)' : '0 0 clamp(90px,12vh,160px)',
         }}
       >
@@ -394,14 +403,14 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* RESONANCE CHAMBER WINDOW */}
-      <section style={{ background: '#E2E0D5', color: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section style={{ background: '#E2E0D5', color: 'rgb(14,15,16)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86 }} />
           <div data-reveal="unveil" data-zoom style={{ display: 'grid', gridTemplateColumns: twoCol, animationDelay: '.1s' }}>
             <div style={{ overflow: 'hidden', aspectRatio: isMobile ? '4 / 3' : undefined }}>
               <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            <div style={{ background: 'rgb(20,21,22)', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 'clamp(32px,4vw,48px)', padding: 'clamp(32px,4vw,56px)' }}>
+            <div style={{ background: 'rgb(14,15,16)', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', gap: 'clamp(32px,4vw,48px)', padding: 'clamp(32px,4vw,56px)' }}>
               <img src="/evozome/logo-light.png" alt="Evozome" width={64} height={64} style={{ width: 64, height: 64, display: 'block' }} />
               <div data-reveal style={{ animationDelay: '.25s' }}>
                 <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 36, lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
@@ -417,7 +426,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       </section>
 
       {/* BUILT TO HEAL intro + cards */}
-      <section id="built-to-heal" style={{ background: 'rgb(20,21,22)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
+      <section id="built-to-heal" style={{ background: 'rgb(14,15,16)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <Letters text={'BUILT TO\nHEAL'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 777, animationDelay: '.15s' }}>
@@ -509,7 +518,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       )}
 
       {/* FOOTER */}
-      <footer id="contact" style={{ background: 'rgb(226,224,213)', color: 'rgb(20,21,22)', padding: 'clamp(70px,8vw,120px) clamp(24px,4vw,64px) 40px' }}>
+      <footer id="contact" style={{ background: 'rgb(226,224,213)', color: 'rgb(14,15,16)', padding: 'clamp(70px,8vw,120px) clamp(24px,4vw,64px) 40px' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: footerCol, gap: 'clamp(40px,5vw,80px)', alignItems: 'start' }}>
           <div style={{ display: 'flex', flexDirection: 'column', fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.7 }}>
             <a href="#">HOME</a>
@@ -531,19 +540,19 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               </div>
             ) : (
               <form action={subscribeAction} style={{ maxWidth: 420 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid rgb(20,21,22)', paddingBottom: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, borderBottom: '1px solid rgb(14,15,16)', paddingBottom: 12 }}>
                   <input
                     required
                     type="email"
                     name="email"
                     placeholder="YOUR EMAIL"
-                    style={{ flex: 1, background: 'rgb(226,224,213)', border: 'none', outline: 'none', fontWeight: 400, fontSize: 18, color: 'rgb(20,21,22)' }}
+                    style={{ flex: 1, background: 'rgb(226,224,213)', border: 'none', outline: 'none', fontWeight: 400, fontSize: 18, color: 'rgb(14,15,16)' }}
                   />
                   <button
                     type="submit"
                     disabled={subscribePending}
                     aria-label="Subscribe"
-                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 18, color: 'rgb(20,21,22)', opacity: subscribePending ? 0.5 : 1 }}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 18, color: 'rgb(14,15,16)', opacity: subscribePending ? 0.5 : 1 }}
                   >
                     →
                   </button>
@@ -572,9 +581,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         <div style={{ maxWidth: 1600, margin: isMobile ? '24px auto 0' : 'clamp(50px,6vw,90px) auto 0', paddingTop: isMobile ? 12 : 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 6 : 14, fontWeight: 400, fontSize: 18 }}>
           <div style={{ display: 'flex', alignItems: 'center', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: isMobile ? 14 : 150, order: isMobile ? 2 : 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(20,21,22)', display: 'block' }} />
-              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(20,21,22)', display: 'block' }} />
-              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(20,21,22)', display: 'block' }} />
+              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(14,15,16)', display: 'block' }} />
+              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(14,15,16)', display: 'block' }} />
+              <span style={{ width: 43, height: 43, borderRadius: '50%', background: 'rgb(14,15,16)', display: 'block' }} />
             </div>
             <span style={isMobile ? { display: 'block', width: '100%' } : undefined}>© {new Date().getFullYear()} EVOZOME.</span>
           </div>

@@ -10,5 +10,9 @@ if (!password) {
 }
 
 const hash = bcrypt.hashSync(password, 10);
-console.log("Paste this into ADMIN_PASSWORD_HASH in .env (dollar signs pre-escaped):");
+console.log("Local dev .env (next dev, dollar signs escaped):");
 console.log(hash.replaceAll("$", "\\$"));
+console.log(
+  "\nProduction .env (Node's --env-file does NOT unescape \\$ — paste this raw form instead):"
+);
+console.log(hash);
