@@ -324,7 +324,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <a
             href="#contact"
             data-reveal
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 12, border: '1px solid rgb(226,224,213)', borderRadius: 0, padding: '15px 30px', fontWeight: 700, fontSize: 14, letterSpacing: '0.12em', animationDelay: '.2s' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 12, border: '1px solid rgba(226,224,213,0.5)', borderRadius: 0, padding: '15px 30px', fontWeight: 400, fontSize: 14, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.85)', animationDelay: '.2s' }}
           >
             CONTACT US <span aria-hidden>→</span>
           </a>
@@ -506,7 +506,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <>
             <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0', display: 'grid', gridTemplateColumns: galleryCol, gap: 'clamp(14px,1.6vw,22px)' }}>
               {content.gallery.map((g, i) => (
-                <div key={g.img + i} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '1 / 1', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
+                <div key={g.img + i} data-reveal="unveil" data-zoom onClick={() => setLightbox(i)} style={{ aspectRatio: '6 / 4', overflow: 'hidden', cursor: 'pointer', position: 'relative', animationDelay: (i * 0.11).toFixed(2) + 's' }}>
                   <img src={g.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   <span style={{ position: 'absolute', left: 14, bottom: 12, fontWeight: 700, fontSize: 13, letterSpacing: '0.14em', color: 'rgb(226,224,213)', mixBlendMode: 'difference' }}>
                     {String(i + 1).padStart(2, '0')}
@@ -515,7 +515,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               ))}
             </div>
 
-            <div style={{ maxWidth: 1600, margin: '50px auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
+            <div style={{ maxWidth: 1600, margin: '25px auto 0', display: 'grid', gridTemplateColumns: cardCol, gap: 'clamp(28px,3.4vw,52px)' }}>
               {HEAL_CARDS.map((c, i) => (
                 <div key={c.title + i} data-reveal="slow" style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingTop: 26, animationDelay: (i * 0.12).toFixed(2) + 's', position: 'relative' }}>
                   <div style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>{content.gallery[i]?.line1}</div>
@@ -628,7 +628,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             <span>ALL RIGHTS RESERVED.</span>
             {!isMobile && (
               <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 120 }}>
-                <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
+                <img src="/evozome/logo-dark.png" alt="Evozome" width={62} height={62} style={{ width: 62, height: 62, display: 'block' }} />
               </a>
             )}
           </div>
