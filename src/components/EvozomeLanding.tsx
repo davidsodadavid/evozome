@@ -193,7 +193,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <>
             <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
               <img src="/evozome/logo-light.png" alt="" width={38} height={38} style={{ width: 38, height: 38, display: 'block' }} />
-              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
+              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', lineHeight: 0.87 }}>EVOZOME</span>
             </a>
             <button
               type="button"
@@ -213,7 +213,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             </nav>
             <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7, padding: '0 clamp(18px,3vw,44px)' }}>
               <img src="/evozome/logo-light.png" alt="" width={30} height={30} style={{ width: 30, height: 30, display: 'block' }} />
-              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
+              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', lineHeight: 0.87 }}>EVOZOME</span>
             </a>
             <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
               <a href="#contact">CONTACT</a>
@@ -228,7 +228,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '34px clamp(24px,4vw,64px)' }}>
             <a href="#" aria-label="Evozome" onClick={() => setNavOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <img src="/evozome/logo-light.png" alt="" width={38} height={38} style={{ width: 38, height: 38, display: 'block' }} />
-              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.22em', lineHeight: 0.87 }}>EVOZOME</span>
+              <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', lineHeight: 0.87 }}>EVOZOME</span>
             </a>
             <button
               type="button"
