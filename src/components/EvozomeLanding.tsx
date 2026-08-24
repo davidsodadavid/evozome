@@ -263,12 +263,12 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             playsInline
             data-parallax
             data-parallax-hero
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.15)' }}
           />
         ) : (
-          <img src={heroSrc} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={heroSrc} alt="" data-parallax data-parallax-hero style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(1.15)' }} />
         )}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.22), rgba(4,12,17,0.4))' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(rgba(4,12,17,0.1), rgba(4,12,17,0.24))' }} />
         <div
           style={
             isMobile
@@ -497,7 +497,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
                   onClick={() => setHealSlide(i)}
                   style={{ background: 'none', border: 'none', padding: '8px 3px', cursor: 'pointer' }}
                 >
-                  <span style={{ display: 'block', width: healSlide === i ? 36 : 22, height: 2, background: healSlide === i ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all .3s ease' }} />
+                  <span style={{ display: 'block', width: healSlide === i ? 54 : 33, height: 2, background: healSlide === i ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all .3s ease' }} />
                 </button>
               ))}
             </div>
@@ -559,7 +559,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             <a href="#about">ABOUT</a>
             <a href="#built-to-heal">BUILT TO HEAL</a>
           </div>
-          {isMobile && <div style={{ width: '100%', height: 1, background: 'rgb(14,15,16)' }} />}
+          {isMobile && <div style={{ height: 1, background: 'rgb(14,15,16)', margin: '0 calc(-1 * clamp(24px,4vw,64px))' }} />}
           <div>
             <div style={{ fontFamily: "'Taviraj', serif", fontWeight: 600, fontSize: 31, lineHeight: 1.2, marginBottom: 26 }}>CONTACT</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, fontWeight: 400, fontSize: 18, lineHeight: 1.17 }}>
