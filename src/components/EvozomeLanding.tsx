@@ -488,16 +488,16 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
                 ))}
               </div>
             </div>
-            <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 32 }}>
+            <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-start', marginTop: 32 }}>
               {content.gallery.map((_, i) => (
                 <button
                   key={i}
                   type="button"
                   aria-label={`Go to slide ${i + 1}`}
                   onClick={() => setHealSlide(i)}
-                  style={{ background: 'none', border: 'none', padding: 8, cursor: 'pointer' }}
+                  style={{ background: 'none', border: 'none', padding: '8px 3px', cursor: 'pointer' }}
                 >
-                  <span style={{ display: 'block', width: healSlide === i ? 28 : 16, height: 2, background: healSlide === i ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all .3s ease' }} />
+                  <span style={{ display: 'block', width: healSlide === i ? 36 : 22, height: 2, background: healSlide === i ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all .3s ease' }} />
                 </button>
               ))}
             </div>
@@ -620,15 +620,17 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             </div>
           </div>
         </div>
-        <div style={{ maxWidth: 1600, margin: isMobile ? '24px auto 0' : 'clamp(50px,6vw,90px) auto 0', paddingTop: isMobile ? 12 : 24, position: isMobile ? 'relative' : undefined, display: 'flex', justifyContent: isMobile ? 'center' : 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 6 : 14, fontWeight: 400, fontSize: 18 }}>
+        <div style={{ maxWidth: 1600, margin: isMobile ? '24px auto 0' : 'clamp(50px,6vw,90px) auto 0', paddingTop: isMobile ? 12 : 24, display: 'flex', justifyContent: isMobile ? 'center' : 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: isMobile ? 6 : 14, fontWeight: 400, fontSize: 18 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : undefined, flexWrap: isMobile ? 'wrap' : 'nowrap', order: isMobile ? 2 : 0 }}>
             <span style={isMobile ? { display: 'block', width: '100%', textAlign: 'center' } : undefined}>© {new Date().getFullYear()} EVOZOME.</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : undefined, gap: 10, width: isMobile ? '100%' : undefined, order: isMobile ? 1 : 0 }}>
             <span>ALL RIGHTS RESERVED.</span>
-            <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: isMobile ? undefined : 120, position: isMobile ? 'absolute' : undefined, right: isMobile ? 0 : undefined, top: isMobile ? '50%' : undefined, transform: isMobile ? 'translateY(-50%)' : undefined }}>
-              <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
-            </a>
+            {!isMobile && (
+              <a href="#" aria-label="Back to top" style={{ display: 'block', marginLeft: 120 }}>
+                <img src="/evozome/logo-dark.png" alt="Evozome" width={80} height={80} style={{ width: 80, height: 80, display: 'block' }} />
+              </a>
+            )}
           </div>
         </div>
       </footer>
