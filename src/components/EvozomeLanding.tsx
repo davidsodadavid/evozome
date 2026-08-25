@@ -193,7 +193,8 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       `}</style>
 
       {/* NAV */}
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: isNavMobile ? 'space-between' : undefined, padding: '34px clamp(24px,4vw,64px)', background: 'transparent' }}>
+      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'transparent', padding: '34px clamp(24px,4vw,64px)' }}>
+        <div style={{ maxWidth: 1600, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: isNavMobile ? 'space-between' : undefined }}>
         {isNavMobile ? (
           <>
             <a href="#" aria-label="Evozome" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -225,6 +226,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             </nav>
           </>
         )}
+        </div>
       </header>
 
       {/* MOBILE NAV OVERLAY */}
