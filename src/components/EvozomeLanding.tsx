@@ -211,7 +211,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </>
         ) : (
           <>
-            <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-start', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
+            <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-start', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87, whiteSpace: 'nowrap' }}>
               <a href="#">HOME</a>
               <a href="#about">ABOUT</a>
               <a href="#built-to-heal">BUILT TO HEAL</a>
@@ -220,7 +220,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               <img src="/evozome/logo-light.png" alt="" width={30} height={30} style={{ width: 30, height: 30, display: 'block' }} />
               <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '0.1em', lineHeight: 0.87 }}>EVOZOME</span>
             </a>
-            <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}>
+            <nav style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: 'clamp(20px,4vw,58px)', fontWeight: 700, fontSize: 18, lineHeight: 0.87, whiteSpace: 'nowrap' }}>
               <a href="#contact">CONTACT</a>
             </nav>
           </>
@@ -302,37 +302,39 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* INTRO STATEMENT */}
       <section style={{ position: 'relative', background: 'rgb(14,15,16)', padding: 'clamp(90px,13vw,180px) clamp(24px,4vw,64px)', overflow: 'hidden' }}>
-        {!isNarrow && (
-          <div data-reveal="unveil" style={{ position: 'absolute', left: isMobile ? 20 : 100, top: isMobile ? 300 : 600, width: isMobile ? 192 : 385 }}>
-            <img src={content.introImageLeft} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
-          </div>
-        )}
-        {!isMobile && (
-          <div data-reveal="unveil" style={{ position: 'absolute', right: 60, top: 100, width: 385, animationDelay: '.12s' }}>
-            <img src={content.introImageRight} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
-          </div>
-        )}
-        <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
+        <div style={{ position: 'relative', maxWidth: 1600, margin: '0 auto' }}>
           {!isNarrow && (
-            <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
-              {content.introLabel.split('\n').map((line, i) => (
-                <span key={i}>
-                  {i > 0 && <br />}
-                  {line}
-                </span>
-              ))}
+            <div data-reveal="unveil" style={{ position: 'absolute', left: isMobile ? 20 : 100, top: isMobile ? 300 : 600, width: isMobile ? 192 : 385 }}>
+              <img src={content.introImageLeft} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
           )}
-          <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontSize: 'clamp(34px,9vw,100px)', lineHeight: 1.15, animationDelay: '.1s' }}>
-            {content.introStatement}
+          {!isMobile && (
+            <div data-reveal="unveil" style={{ position: 'absolute', right: 60, top: 100, width: 385, animationDelay: '.12s' }}>
+              <img src={content.introImageRight} alt="" data-parallax-fg style={{ width: '100%', height: 'auto', display: 'block' }} />
+            </div>
+          )}
+          <div style={{ position: 'relative', maxWidth: 1400, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(22px,3vw,34px)' }}>
+            {!isNarrow && (
+              <div data-reveal style={{ fontWeight: 400, fontSize: 21, letterSpacing: '0.14em', lineHeight: 1.4, animationDelay: '.05s' }}>
+                {content.introLabel.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {i > 0 && <br />}
+                    {line}
+                  </span>
+                ))}
+              </div>
+            )}
+            <div data-reveal="slow" style={{ fontFamily: "'Taviraj', serif", fontWeight: 200, fontSize: 'clamp(34px,9vw,100px)', lineHeight: 1.15, animationDelay: '.1s' }}>
+              {content.introStatement}
+            </div>
+            <a
+              href="#contact"
+              data-reveal
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 12, border: '1px solid rgba(226,224,213,0.5)', borderRadius: 0, padding: '15px 30px', fontWeight: 400, fontSize: 14, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.85)', animationDelay: '.2s' }}
+            >
+              CONTACT US <span aria-hidden>→</span>
+            </a>
           </div>
-          <a
-            href="#contact"
-            data-reveal
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 12, border: '1px solid rgba(226,224,213,0.5)', borderRadius: 0, padding: '15px 30px', fontWeight: 400, fontSize: 14, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.85)', animationDelay: '.2s' }}
-          >
-            CONTACT US <span aria-hidden>→</span>
-          </a>
         </div>
       </section>
 
@@ -380,23 +382,25 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           alignItems: 'center',
           justifyContent: 'center',
           background: 'rgb(14,15,16)',
-          padding: isMobile ? 'clamp(40px,6vh,64px) 0 clamp(48px,7vh,72px)' : '0 0 clamp(90px,12vh,160px)',
+          padding: isMobile ? 'clamp(40px,6vh,64px) clamp(24px,4vw,64px) clamp(48px,7vh,72px)' : '0 clamp(24px,4vw,64px) clamp(90px,12vh,160px)',
         }}
       >
-        <div style={{ position: 'relative', width: '100%', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03, padding: '0 clamp(24px,4vw,64px)' }}>
-          <div style={{ textAlign: 'left' }}>BUILD TO</div>
-          <div style={{ textAlign: 'right' }}>HEAL</div>
+        <div style={{ position: 'relative', width: '100%', maxWidth: 1600, margin: '0 auto' }}>
+          <div style={{ position: 'relative', width: '100%', fontFamily: "'Taviraj', serif", fontWeight: 200, fontStyle: 'italic', fontSize: 'clamp(64px,15.5vw,300px)', lineHeight: 1.03 }}>
+            <div style={{ textAlign: 'left' }}>BUILD TO</div>
+            <div style={{ textAlign: 'right' }}>HEAL</div>
+          </div>
+          <p
+            data-reveal
+            style={
+              isMobile
+                ? { position: 'relative', marginTop: 32, fontWeight: 400, fontSize: 18, lineHeight: 1.17, maxWidth: 651 }
+                : { position: 'absolute', left: 0, bottom: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651 }
+            }
+          >
+            {content.resonanceText}
+          </p>
         </div>
-        <p
-          data-reveal
-          style={
-            isMobile
-              ? { position: 'relative', marginTop: 32, padding: '0 clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, maxWidth: 651 }
-              : { position: 'absolute', left: 'clamp(24px,4vw,64px)', bottom: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651 }
-          }
-        >
-          {content.resonanceText}
-        </p>
       </section>
 
       {/* ARMADILLO 2.0 FEATURE */}
@@ -414,12 +418,21 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         ) : (
           <img src={armadilloSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         )}
-        <span style={{ position: 'absolute', top: 'clamp(24px,4vw,64px)', left: 'clamp(24px,4vw,64px)', fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
-          ARMADILLO / 2.0
-        </span>
-        <span style={{ position: 'absolute', bottom: 'clamp(24px,4vw,64px)', left: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
-          ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND
-        </span>
+        {/* Two nested wrappers so the captions sit on the same 1600px grid as
+            every other section without shrinking the full-bleed video: the
+            outer one reproduces "section padding" (without being padding on
+            the section itself, which would inset the video), the inner one
+            reproduces the maxWidth:1600 + margin:auto grid column. */}
+        <div style={{ position: 'absolute', inset: 0, padding: 'clamp(24px,4vw,64px)' }}>
+          <div style={{ position: 'relative', height: '100%', maxWidth: 1600, margin: '0 auto' }}>
+            <span style={{ position: 'absolute', top: 0, left: 0, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
+              ARMADILLO / 2.0
+            </span>
+            <span style={{ position: 'absolute', bottom: 0, left: 0, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
+              ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND
+            </span>
+          </div>
+        </div>
       </section>
 
       {/* RESONANCE CHAMBER WINDOW */}
