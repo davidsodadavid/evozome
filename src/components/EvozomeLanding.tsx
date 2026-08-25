@@ -404,10 +404,10 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         ) : (
           <img src={armadilloSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         )}
-        <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
+        <span style={{ position: 'absolute', top: 34, left: 34, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
           ARMADILLO / 2.0
         </span>
-        <span style={{ position: 'absolute', bottom: 24, left: 24, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
+        <span style={{ position: 'absolute', bottom: 34, left: 34, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
           ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND
         </span>
       </section>
@@ -415,7 +415,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       {/* RESONANCE CHAMBER WINDOW */}
       <section style={{ background: '#E2E0D5', color: 'rgb(14,15,16)', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
-          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 'clamp(48px,7.2vw,102px)', lineHeight: 0.86 }} />
+          <Letters text={'RESONANCE\nCHAMBER'} as="div" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: w <= 1500 ? 'clamp(38.4px,5.76vw,81.6px)' : 'clamp(48px,7.2vw,102px)', lineHeight: 0.86 }} />
           <div data-reveal="unveil" data-zoom style={{ display: 'grid', gridTemplateColumns: twoCol, animationDelay: '.1s' }}>
             <div style={{ overflow: 'hidden', aspectRatio: isMobile ? '4 / 3' : undefined }}>
               <img src={content.windowImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -426,7 +426,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
                 <h2 style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontSize: 36, lineHeight: 0.87, margin: '0 0 24px', color: '#fff' }}>
                   {content.windowHeading}
                 </h2>
-                <p style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, color: '#fff' }}>
+                <p style={{ fontWeight: 400, fontSize: w <= 1250 ? 9 : 18, lineHeight: 1.17, margin: 0, color: '#fff' }}>
                   {content.windowText}
                 </p>
               </div>
