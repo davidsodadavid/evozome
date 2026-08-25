@@ -404,10 +404,10 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         ) : (
           <img src={armadilloSrc} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         )}
-        <span style={{ position: 'absolute', top: 34, left: 34, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
+        <span style={{ position: 'absolute', top: 'clamp(24px,4vw,64px)', left: 'clamp(24px,4vw,64px)', fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
           ARMADILLO / 2.0
         </span>
-        <span style={{ position: 'absolute', bottom: 34, left: 34, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
+        <span style={{ position: 'absolute', bottom: 'clamp(24px,4vw,64px)', left: 'clamp(24px,4vw,64px)', fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
           ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND
         </span>
       </section>
