@@ -88,7 +88,7 @@ export default function ImagePicker({
         <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md border border-white/15 bg-black/30">
           {url ? (
             previewIsVideo ? (
-              <video src={url} className="h-full w-full object-cover" muted />
+              <video src={url} className="h-full w-full object-cover" autoPlay muted loop playsInline />
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={url} alt="" className="h-full w-full object-cover" />
@@ -172,7 +172,7 @@ function MediaGrid({
           }`}
         >
           {m.kind === "video" ? (
-            <video src={m.url} className="h-full w-full object-cover" muted />
+            <video src={m.url} className="h-full w-full object-cover" autoPlay muted loop playsInline />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={m.url} alt="" className="h-full w-full object-cover" />
