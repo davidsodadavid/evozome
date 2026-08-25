@@ -37,6 +37,7 @@ export async function updateContent(
     resonanceText: str(formData, "resonanceText"),
     resonanceImage1: str(formData, "resonanceImage1"),
     resonanceImage2: str(formData, "resonanceImage2"),
+    resonancePhotosCaption: str(formData, "resonancePhotosCaption"),
 
     aboutText: str(formData, "aboutText"),
 

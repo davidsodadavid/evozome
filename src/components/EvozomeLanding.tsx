@@ -350,12 +350,22 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
             <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
               INSIDE
             </span>
+            {!isNarrow && (
+              <span style={{ position: 'absolute', bottom: 24, left: 24, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
+                {content.resonancePhotosCaption}
+              </span>
+            )}
           </div>
           <div data-reveal="unveil" data-zoom style={{ position: 'relative', aspectRatio: '4 / 3', overflow: 'hidden', animationDelay: '.14s' }}>
             <img src={content.resonanceImage2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             <span style={{ position: 'absolute', top: 24, left: 24, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
               OUTSIDE
             </span>
+            {!isNarrow && (
+              <span style={{ position: 'absolute', bottom: 24, left: 24, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
+                {content.resonancePhotosCaption}
+              </span>
+            )}
           </div>
         </div>
       </section>

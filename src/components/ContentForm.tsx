@@ -102,6 +102,10 @@ export default function ContentForm({
           <ImagePicker name="resonanceImage1" label="Left photo (INSIDE)" initialUrl={content.resonanceImage1} mediaLibrary={mediaLibrary} />
           <ImagePicker name="resonanceImage2" label="Right photo (OUTSIDE)" initialUrl={content.resonanceImage2} mediaLibrary={mediaLibrary} />
         </div>
+        <div>
+          <label className={labelClass}>Photo caption (bottom-left on both INSIDE and OUTSIDE, hidden on screens &lt;=1024px)</label>
+          <input type="text" name="resonancePhotosCaption" defaultValue={content.resonancePhotosCaption} className={fieldClass} />
+        </div>
       </div>
 
       <div className={sectionClass}>
