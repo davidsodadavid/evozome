@@ -74,7 +74,11 @@ function Letters({ text, as: Tag = 'span', style }: { text: string; as?: any; st
 }
 
 export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?: LandingContent }) {
-  const [w, setW] = useState(typeof window !== 'undefined' ? window.innerWidth : 1440);
+  // Always start at the server's default (1440) on the client's first render too —
+  // reading window.innerWidth here would make that first render diverge from the
+  // server-rendered HTML (which has no window) and trigger a hydration mismatch.
+  // The resize effect below corrects it to the real width immediately after mount.
+  const [w, setW] = useState(1440);
   const [lightbox, setLightbox] = useState(-1);
   const [openCards, setOpenCards] = useState<Record<number, boolean>>({});
   const [subscribeState, subscribeAction, subscribePending] = useActionState(subscribe, subscribeInitialState);
@@ -131,6 +135,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const isTablet = w >= 760 && w < 1100;
   const isNavMobile = w < 769;
   const isNarrow = w <= 1024;
+  const isHealNarrow = w <= 1100;
   const twoCol = isMobile ? '1fr' : '1fr 1fr';
   const cardCol = isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)';
   const galleryCol = isMobile ? '1fr 1fr' : 'repeat(4, 1fr)';
@@ -444,7 +449,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
           </p>
         </div>
 
-        {isNarrow ? (
+        {isHealNarrow ? (
           <div style={{ maxWidth: 1600, margin: 'clamp(56px,7vw,100px) auto 0' }}>
             <div
               onTouchStart={(e) => { touchStartXRef.current = e.touches[0].clientX; }}
