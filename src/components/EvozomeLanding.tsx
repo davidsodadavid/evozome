@@ -84,6 +84,8 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
   const [subscribeState, subscribeAction, subscribePending] = useActionState(subscribe, subscribeInitialState);
   const [navOpen, setNavOpen] = useState(false);
   const [healSlide, setHealSlide] = useState(0);
+  const [navHidden, setNavHidden] = useState(false);
+  const [navScrolled, setNavScrolled] = useState(false);
   const touchStartXRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -91,6 +93,24 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
     onResize();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  // Nav bar: slides up while actively scrolling (either direction), slides
+  // back into view once scrolling stops (or when back near the top).
+  useEffect(() => {
+    let stopTimer: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setNavScrolled(y > 10);
+      setNavHidden(y > 80);
+      clearTimeout(stopTimer);
+      stopTimer = setTimeout(() => setNavHidden(false), 150);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(stopTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -193,7 +213,19 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       `}</style>
 
       {/* NAV */}
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'transparent', padding: '34px clamp(24px,4vw,64px)' }}>
+      <header
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: navScrolled ? 'rgba(14,15,16,0.72)' : 'transparent',
+          padding: '34px clamp(24px,4vw,64px)',
+          transform: navHidden ? 'translateY(-100%)' : 'translateY(0)',
+          transition: 'transform .35s cubic-bezier(.22,.61,.36,1), background .3s ease',
+        }}
+      >
         {!isNavMobile && (
           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 200, background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0))', pointerEvents: 'none', zIndex: -1 }} />
         )}
@@ -208,7 +240,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
               type="button"
               onClick={() => setNavOpen(true)}
               aria-label="Open menu"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 6, fontWeight: 700, fontSize: 18, lineHeight: 0.87 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', padding: 6, fontWeight: 400, fontSize: 13, letterSpacing: '0.1em', lineHeight: 0.87 }}
             >
               MENU
             </button>
