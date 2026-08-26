@@ -194,6 +194,9 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
 
       {/* NAV */}
       <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'transparent', padding: '34px clamp(24px,4vw,64px)' }}>
+        {!isNavMobile && (
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 200, background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0))', pointerEvents: 'none', zIndex: -1 }} />
+        )}
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: isNavMobile ? 'space-between' : undefined }}>
         {isNavMobile ? (
           <>
