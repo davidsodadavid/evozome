@@ -17,12 +17,20 @@ const nextConfig: NextConfig = {
       // the admin panel crashes with ERR_DLOPEN_FAILED. Both the top-level
       // symlinked path and the underlying pnpm store path are listed since
       // it's one extra symlink hop deeper than bcryptjs (sharp -> its own
-      // nested @img optional deps). Production is Debian (glibc) linux-x64.
+      // nested @img optional deps) — plus sharp's own plain-JS runtime deps
+      // (@img/colour, detect-libc, semver), which the tracer also drops for
+      // the same reason. Production is Debian (glibc) linux-x64.
       "./node_modules/sharp/**",
       "./node_modules/@img/sharp-linux-x64/**",
       "./node_modules/@img/sharp-libvips-linux-x64/**",
+      "./node_modules/@img/colour/**",
+      "./node_modules/detect-libc/**",
+      "./node_modules/semver/**",
       "./node_modules/.pnpm/@img+sharp-linux-x64@*/**",
       "./node_modules/.pnpm/@img+sharp-libvips-linux-x64@*/**",
+      "./node_modules/.pnpm/@img+colour@*/**",
+      "./node_modules/.pnpm/detect-libc@*/**",
+      "./node_modules/.pnpm/semver@*/**",
     ],
   },
   turbopack: {
