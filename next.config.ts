@@ -4,33 +4,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Self-contained production build (server.js + traced node_modules) for VPS deploys
   output: "standalone",
+  // sharp has a native addon plus a pile of nested-only (non-hoisted) plain
+  // JS deps (detect-libc, semver, @img/colour) that outputFileTracingIncludes
+  // globs below couldn't reliably catch — every deploy shipped a sharp
+  // missing one piece or another, breaking photo uploads in the admin
+  // panel. This tells Next to require() sharp via plain Node resolution
+  // instead of bundling/tracing it, which makes the standalone build copy
+  // its whole real node_modules folder (and its deps) verbatim.
+  serverExternalPackages: ["sharp"],
   outputFileTracingIncludes: {
     "/**": [
       // bcryptjs ships a dual ESM/CJS package.json that Next's file tracer
       // fails to follow, silently dropping it from the standalone build and
       // breaking the login server action at runtime. Force it in explicitly.
       "./node_modules/bcryptjs/**",
-      // sharp resolves its native binary via a runtime require() computed
-      // from process.platform/arch, which the tracer's static analysis can't
-      // follow — same class of bug as bcryptjs above. Without this, every
-      // deploy ships a sharp with no binary at all, and uploading a photo in
-      // the admin panel crashes with ERR_DLOPEN_FAILED. Both the top-level
-      // symlinked path and the underlying pnpm store path are listed since
-      // it's one extra symlink hop deeper than bcryptjs (sharp -> its own
-      // nested @img optional deps) — plus sharp's own plain-JS runtime deps
-      // (@img/colour, detect-libc, semver), which the tracer also drops for
-      // the same reason. Production is Debian (glibc) linux-x64.
-      "./node_modules/sharp/**",
-      "./node_modules/@img/sharp-linux-x64/**",
-      "./node_modules/@img/sharp-libvips-linux-x64/**",
-      "./node_modules/@img/colour/**",
-      "./node_modules/detect-libc/**",
-      "./node_modules/semver/**",
-      "./node_modules/.pnpm/@img+sharp-linux-x64@*/**",
-      "./node_modules/.pnpm/@img+sharp-libvips-linux-x64@*/**",
-      "./node_modules/.pnpm/@img+colour@*/**",
-      "./node_modules/.pnpm/detect-libc@*/**",
-      "./node_modules/.pnpm/semver@*/**",
     ],
   },
   turbopack: {
