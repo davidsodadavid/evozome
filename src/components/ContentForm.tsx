@@ -95,6 +95,17 @@ export default function ContentForm({
           hint="Heading + text + the INSIDE/OUTSIDE photo pair. This text is also reused lower down in the oversized “BUILD TO HEAL” section."
         />
         <div>
+          <label className={labelClass}>Heading</label>
+          <textarea
+            name="resonanceHeading"
+            defaultValue={content.resonanceHeading}
+            rows={2}
+            className={fieldClass}
+            placeholder={"ARMADILLO\n2.0"}
+          />
+          <p className={hintClass}>Big italic heading above the text below. Line break = second line.</p>
+        </div>
+        <div>
           <label className={labelClass}>Text</label>
           <textarea name="resonanceText" defaultValue={content.resonanceText} rows={4} className={fieldClass} />
         </div>
@@ -127,6 +138,14 @@ export default function ContentForm({
             kinds={["video"]}
           />
         )}
+        <div>
+          <label className={labelClass}>Label (top-left, bold)</label>
+          <input type="text" name="armadilloLabel" defaultValue={content.armadilloLabel} className={fieldClass} />
+        </div>
+        <div>
+          <label className={labelClass}>Text (bottom-left)</label>
+          <input type="text" name="armadilloText" defaultValue={content.armadilloText} className={fieldClass} />
+        </div>
       </div>
 
       <div className={sectionClass}>

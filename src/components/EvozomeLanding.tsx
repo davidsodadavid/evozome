@@ -378,7 +378,7 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
       {/* RESONANCE CHAMBER */}
       <section id="about" style={{ background: 'rgb(14,15,16)', color: '#fff', padding: 'clamp(80px,10vw,150px) clamp(24px,4vw,64px)' }}>
         <div style={{ maxWidth: 1600, margin: '0 auto', display: 'grid', gridTemplateColumns: twoCol, gap: 'clamp(40px,6vw,90px)', alignItems: 'end' }}>
-          <Letters text={'ARMADILLO\n2.0'} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontStyle: 'italic', fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
+          <Letters text={content.resonanceHeading} as="h2" style={{ fontFamily: "'Taviraj', serif", fontWeight: 400, fontStyle: 'italic', fontSize: 'clamp(46px,7vw,100px)', lineHeight: 1.03, margin: 0 }} />
           <p data-reveal style={{ fontWeight: 400, fontSize: 18, lineHeight: 1.17, margin: 0, maxWidth: 651, animationDelay: '.15s' }}>
             {content.resonanceText}
           </p>
@@ -463,10 +463,10 @@ export default function EvozomeLanding({ content = DEFAULT_CONTENT }: { content?
         <div style={{ position: 'absolute', inset: 0, padding: 'clamp(24px,4vw,64px)' }}>
           <div style={{ position: 'relative', height: '100%', maxWidth: 1600, margin: '0 auto' }}>
             <span style={{ position: 'absolute', top: 0, left: 0, fontWeight: 700, fontSize: 36, lineHeight: 0.87, color: '#fff' }}>
-              ARMADILLO / 2.0
+              {content.armadilloLabel}
             </span>
             <span style={{ position: 'absolute', bottom: 0, left: 0, fontWeight: 400, fontSize: 18, lineHeight: 1.17, color: '#fff', maxWidth: 400 }}>
-              ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND
+              {content.armadilloText}
             </span>
           </div>
         </div>

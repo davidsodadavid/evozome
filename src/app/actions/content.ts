@@ -34,6 +34,7 @@ export async function updateContent(
     introImageLeft: str(formData, "introImageLeft"),
     introImageRight: str(formData, "introImageRight"),
 
+    resonanceHeading: str(formData, "resonanceHeading"),
     resonanceText: str(formData, "resonanceText"),
     resonanceImage1: str(formData, "resonanceImage1"),
     resonanceImage2: str(formData, "resonanceImage2"),
@@ -47,6 +48,8 @@ export async function updateContent(
 
     armadilloImage: str(formData, "armadilloImage"),
     armadilloImageMobile: str(formData, "armadilloImageMobile"),
+    armadilloLabel: str(formData, "armadilloLabel"),
+    armadilloText: str(formData, "armadilloText"),
 
     gallery: [0, 1, 2, 3].map((i) => ({
       img: str(formData, `gallery-${i}-img`),

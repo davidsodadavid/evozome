@@ -17,6 +17,8 @@ export type LandingContent = {
   introImageLeft: string;
   introImageRight: string;
 
+  /** Big italic heading above resonanceText — "\n" breaks it onto a second line. */
+  resonanceHeading: string;
   resonanceText: string;
   resonanceImage1: string;
   resonanceImage2: string;
@@ -35,6 +37,10 @@ export type LandingContent = {
   /** Optional mobile-only override for armadilloImage — only meaningful when
    * armadilloImage is a video. Empty string means "use armadilloImage on mobile too". */
   armadilloImageMobile: string;
+  /** Bold label overlaid top-left on the Armadillo 2.0 feature photo/video. */
+  armadilloLabel: string;
+  /** Text overlaid bottom-left on the Armadillo 2.0 feature photo/video. */
+  armadilloText: string;
 
   gallery: { img: string; line1: string; line2: string }[];
 
@@ -55,6 +61,7 @@ export const DEFAULT_CONTENT: LandingContent = {
   introImageLeft: "/evozome/img-03.png",
   introImageRight: "/evozome/img-04.png",
 
+  resonanceHeading: "ARMADILLO\n2.0",
   resonanceText:
     "RESONANCE CHAMBER — IS A SPACE OR STRUCTURE DESIGNED TO AMPLIFY, SHAPE, AND TRANSMIT SOUND AND VIBRATION THROUGH ITS GEOMETRY, MATERIALS, AND ACOUSTIC PROPERTIES. THE CONCEPT ORIGINATES FROM ACOUSTICS, ARCHITECTURE, AND MUSICAL INSTRUMENTS, ENVIRONMENTS.",
   resonanceImage1: "https://pub-9230832a19fe46b3b1f291f153cea0ef.r2.dev/media/photos/154242dc-7488-497e-8ca4-7266e15fdff7.webp",
@@ -71,6 +78,8 @@ export const DEFAULT_CONTENT: LandingContent = {
 
   armadilloImage: "/evozome/img-06.png",
   armadilloImageMobile: "",
+  armadilloLabel: "ARMADILLO / 2.0",
+  armadilloText: "ARCHITECTURE THAT CHANGES HOW YOU EXPERIENCE NATURE AND SOUND",
 
   gallery: [
     { img: "/evozome/img-08.png", line1: "A PRIVATE ARCHITECTURAL", line2: "INSPIRED BY ANCIENT ACOUSTIC ARCHITECTURE, SACRED GEOMETRY, AND THE TIMELESS RELATIONSHIP BETWEEN SPACE AND VIBRATION" },
